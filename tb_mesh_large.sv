@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module tb_mesh_4x4_random_bp_10k;
+module tb_torus_4x4_random_bp_10k;
 
     localparam int NUM_NODES   = 16;
     localparam int TOTAL_PKTS  = 20000;
@@ -27,7 +27,7 @@ module tb_mesh_4x4_random_bp_10k;
     int exp_count      [0:NUM_NODES-1][0:15];
     int recv_count_arr [0:NUM_NODES-1][0:15];
 
-    mesh_4x4 dut (
+    torus_4x4 dut (
         .clk            (clk),
         .rst_n          (rst_n),
         .local_in_vld   (local_in_vld),
@@ -44,8 +44,8 @@ module tb_mesh_4x4_random_bp_10k;
     end
 
     initial begin
-        $dumpfile("mesh_4x4_random_bp_10k.vcd");
-        $dumpvars(0, tb_mesh_4x4_random_bp_10k);
+        $dumpfile("torus_4x4_random_bp_10k.vcd");
+        $dumpvars(0, tb_torus_4x4_random_bp_10k);
     end
 
     function automatic logic [7:0] make_pkt(

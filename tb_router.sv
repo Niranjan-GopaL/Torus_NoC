@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module tb_mesh_router_5x5;
+module tb_torus_router_5x5;
 
     localparam int LOCAL = 0;
     localparam int EAST  = 1;
@@ -22,7 +22,7 @@ module tb_mesh_router_5x5;
     int pass_count;
     int fail_count;
 
-    mesh_router_5x5 #(
+    torus_router_5x5 #(
         .CURR_X(1),
         .CURR_Y(1)
     ) dut (
@@ -42,8 +42,8 @@ module tb_mesh_router_5x5;
     end
 
     initial begin
-        $dumpfile("mesh_router_5x5.vcd");
-        $dumpvars(0, tb_mesh_router_5x5);
+        $dumpfile("torus_router_5x5.vcd");
+        $dumpvars(0, tb_torus_router_5x5);
     end
 
     function automatic logic [7:0] make_pkt(
