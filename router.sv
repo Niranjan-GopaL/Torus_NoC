@@ -781,7 +781,7 @@ endmodule
 
 
 
-module mesh_router_5x5 #(
+module torus_router_5x5 #(
     parameter int CURR_X = 0,
     parameter int CURR_Y = 0
 )(

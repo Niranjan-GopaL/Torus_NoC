@@ -65,26 +65,25 @@ module valid_ready_slice (
     logic        data_valid;
     logic [7:0]  data_reg;
 
-    // Ready when: no valid data stored OR downstream can accept
-    assign ready_out = (!rst_n) ? 1'b0 : !data_valid || ready_in;
+// ready_out depends only on internal state, NOT on ready_in
+    assign ready_out = rst_n && !data_valid;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             data_valid <= 1'b0;
             data_reg   <= 8'h00;
-        end else if (valid_in && ready_out) begin
-            data_valid <= 1'b1;
-            data_reg   <= data_in;
-        end else if (data_valid && ready_in) begin
-            data_valid <= 1'b0;
+        end else begin
+            if (valid_in && ready_out)
+                data_valid <= 1'b1;
+            else if (data_valid && ready_in)
+                data_valid <= 1'b0;
+            if (valid_in && ready_out)
+                data_reg <= data_in;
         end
     end
 
-    // Valid when: holding data OR new data arriving this cycle
-    assign valid_out = data_valid || (valid_in && ready_out);
-
-    // Data out: stored data if valid, otherwise incoming data
-    assign data_out  = data_valid ? data_reg : data_in;
+    assign valid_out = data_valid;        // no combinational fall-through
+    assign data_out  = data_reg;          // always the registered value
 
 endmodule
 
@@ -245,13 +244,17 @@ module merge_4to1_comb #(
     // ── Step 2: select grant (masked first, fallback to unmasked) ──
     assign grant = (|masked_req) ? (masked_req & (~masked_req + 1)) : unmasked_grant;
 
-    // ── Step 3: one-hot to binary index ──
-    assign selected_port = (grant == '0) ? '0 : $clog2(grant & -grant);
+// ── Step 3: one-hot to binary index ──
+    always_comb begin
+        selected_port = '0;
+        for (int i = NUM_PORTS-1; i >= 0; i--)
+            if (grant[i]) selected_port = i[$clog2(NUM_PORTS)-1:0];
+    end
 
     // ── Step 4: combinational outputs ──
     assign ready_in  = grant & {NUM_PORTS{ready_out}};
-    assign valid_out = |grant && ready_out;
-    assign data_out  = (valid_out && ready_out) ? data_in[selected_port] : '0;
+    assign valid_out = |grant;
+    assign data_out  = data_in[selected_port];
 
     // ── Step 5: round-robin mask update ──
     always_ff @(posedge clk or negedge rst_n) begin

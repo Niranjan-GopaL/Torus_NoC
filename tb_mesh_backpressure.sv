@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module tb_mesh_4x4;
+module tb_torus_4x4;
 
     logic              clk;
     logic              rst_n;
@@ -16,7 +16,7 @@ module tb_mesh_4x4;
     int pass_count;
     int fail_count;
 
-    mesh_4x4 dut (
+    torus_4x4 dut (
         .clk            (clk),
         .rst_n          (rst_n),
         .local_in_vld   (local_in_vld),
@@ -33,8 +33,8 @@ module tb_mesh_4x4;
     end
 
     initial begin
-        $dumpfile("mesh_4x4.vcd");
-        $dumpvars(0, tb_mesh_4x4);
+        $dumpfile("torus_4x4.vcd");
+        $dumpvars(0, tb_torus_4x4);
     end
 
     function automatic logic [7:0] make_pkt(
