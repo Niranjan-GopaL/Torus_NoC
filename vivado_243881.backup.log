@@ -1,0 +1,162 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Wed May 27 01:46:23 2026
+# Process ID         : 243881
+# Current directory  : /home/nira/Documents/code/swe/claude_code_project/noc_project/final
+# Command line       : vivado -mode batch -source /tmp/exp_workload_Odd-Even_UNIFORM_RANDOM_70_10_8.tcl
+# Log file           : /home/nira/Documents/code/swe/claude_code_project/noc_project/final/vivado.log
+# Journal file       : /home/nira/Documents/code/swe/claude_code_project/noc_project/final/vivado.jou
+# Running On         : loq
+# Platform           : Ubuntu
+# Operating System   : Ubuntu 24.04.4 LTS
+# Processor Detail   : AMD Ryzen 7 8845HS w/ Radeon 780M Graphics
+# CPU Frequency      : 2996.484 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 16029 MB
+# Swap memory        : 4294 MB
+# Total Virtual      : 20324 MB
+# Available Virtual  : 11605 MB
+#-----------------------------------------------------------
+source /tmp/exp_workload_Odd-Even_UNIFORM_RANDOM_70_10_8.tcl
+# open_project {/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.xpr}
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+# set_property generic {} [get_filesets sim_1]
+# set_property top tb_noc_workload_comparison [get_filesets sim_1]
+# launch_simulation -mode behavioral
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_noc_workload_comparison'
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/tools/Xilinx/Vivado/2024.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_noc_workload_comparison' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_noc_workload_comparison_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/nira/Documents/code/swe/claude_code_project/noc_project/final/router_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module xy_route_logic
+INFO: [VRFC 10-311] analyzing module valid_ready_slice
+INFO: [VRFC 10-311] analyzing module fifo_sync
+INFO: [VRFC 10-311] analyzing module split_1to4_simple
+INFO: [VRFC 10-311] analyzing module merge_4to1_comb
+INFO: [VRFC 10-311] analyzing module router_with_fifo
+INFO: [VRFC 10-311] analyzing module torus_router_5x5
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/nira/Documents/code/swe/claude_code_project/noc_project/final/torus_4x4.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module torus_4x4
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/nira/Documents/code/swe/claude_code_project/noc_project/final/tb_different_workload.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_noc_workload_comparison
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_noc_workload_comparison_behav xil_defaultlib.tb_noc_workload_comparison xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2024.2.0
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2024.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_noc_workload_comparison_behav xil_defaultlib.tb_noc_workload_comparison xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.fifo_sync(DEPTH=8)
+Compiling module xil_defaultlib.xy_route_logic
+Compiling module xil_defaultlib.split_1to4_simple
+Compiling module xil_defaultlib.merge_4to1_comb
+Compiling module xil_defaultlib.valid_ready_slice
+Compiling module xil_defaultlib.router_with_fifo(FIFO_DEPTH=8)
+Compiling module xil_defaultlib.torus_router_5x5(FIFO_DEPTH=8)
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=1,FIFO_D...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=2,FIFO_D...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=3,FIFO_D...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_Y=1,FIFO_D...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=1,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=2,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=3,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_Y=2,FIFO_D...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=1,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=2,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=3,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_Y=3,FIFO_D...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=1,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=2,CURR_Y...
+Compiling module xil_defaultlib.torus_router_5x5(CURR_X=3,CURR_Y...
+Compiling module xil_defaultlib.torus_4x4_default
+Compiling module xil_defaultlib.tb_noc_workload_comparison
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_noc_workload_comparison_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/home/nira/Documents/code/ece/rtl/Torus_4x4_extensive_tests/Torus_4x4_extensive_tests.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_noc_workload_comparison_behav -key {Behavioral:sim_1:Functional:tb_noc_workload_comparison} -tclbatch {tb_noc_workload_comparison.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_noc_workload_comparison.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+WARNING: [Wavedata 42-489] Can't add object "/tb_noc_workload_comparison/send_ts_mem" to the wave window because it has 8192512 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+## run 1000ns
+==========================================
+ROUTER TRAFFIC TEST
+Traffic pattern : UNIFORM_RANDOM
+Packets/source  : 1000  (total 16000)
+Backpressure    : 70% ready
+==========================================
+[65000] Starting traffic...
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_noc_workload_comparison_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1532.465 ; gain = 86.559 ; free physical = 732 ; free virtual = 10568
+# run 60000ns
+[2075000] Progress: 1600 / 16000
+[4085000] Progress: 3200 / 16000
+[6145000] Progress: 4800 / 16000
+[8275000] Progress: 6400 / 16000
+[10245000] Progress: 8000 / 16000
+[12655000] Progress: 9600 / 16000
+[14705000] Progress: 11200 / 16000
+[16705000] Progress: 12800 / 16000
+[19035000] Progress: 14400 / 16000
+[24535000] Progress: 16000 / 16000
+
+=== RESULTS ===
+Cycles taken    : 2447
+Packets sent    : 16000 / 16000
+Packets received: 16000 / 16000
+PASS: all packets sent
+PASS: all packets received
+
+Approx latency (cycles, see header caveat):
+  average : 37
+  min     : 5
+  max     : 82
+PASS: payload counts all match
+------------------------------------------
+PASS = 3 / 3
+FAIL = 0
+FINAL RESULT: PASS
+==========================================
+$finish called at time : 24535 ns : File "/home/nira/Documents/code/swe/claude_code_project/noc_project/final/tb_different_workload.sv" Line 422
+# close_sim
+INFO: [Simtcl 6-16] Simulation closed
+# exit
+INFO: [Common 17-206] Exiting Vivado at Wed May 27 01:46:34 2026...

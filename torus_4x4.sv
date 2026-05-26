@@ -18,7 +18,9 @@
 //   North of (x,y) connects to South of (x, (y+1)%4)
 //   South of (x,y) connects to North of (x, (y-1)%4)
 // =============================================================================
-module torus_4x4 (
+module torus_4x4 #(
+    parameter int FIFO_DEPTH = 8
+)(
     input  logic              clk,
     input  logic              rst_n,
 
@@ -62,7 +64,8 @@ module torus_4x4 (
 
                 torus_router_5x5 #(
                     .CURR_X (gx),
-                    .CURR_Y (gy)
+                    .CURR_Y (gy),
+                    .FIFO_DEPTH (FIFO_DEPTH)
                 ) u_router (
                     .clk      (clk),
                     .rst_n    (rst_n),

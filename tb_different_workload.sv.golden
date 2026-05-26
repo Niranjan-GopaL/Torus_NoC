@@ -37,9 +37,9 @@ module tb_noc_workload_comparison;
         NEIGHBOR_BURST
     } traffic_pattern_t;
 
-    localparam traffic_pattern_t TRAFFIC_PATTERN = UNIFORM_RANDOM;
+    localparam traffic_pattern_t TRAFFIC_PATTERN = BIT_COMPLEMENT;
 
-    localparam int BP_READY_PERCENT = 100;        // 0..100, lower = more backpressure
+    localparam int BP_READY_PERCENT = 70;        // 0..100, lower = more backpressure
     localparam int BP_HOTSPOT_PCT   = 10;        // % of HOTSPOT traffic aimed at node 0
 
     // ============================================
