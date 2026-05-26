@@ -38,6 +38,38 @@ module xy_route_logic (
             out_port = PORT_L;
     end
 
+
+    // My own custom torus routing algorithm 
+
+    logic [1:0] fdx, fdy;   // forward (East/North) ring distance, mod 4
+
+    always_comb begin
+        fdx = (dst_x - my_x) & 2'b11;
+        fdy = (dst_y - my_y) & 2'b11;
+
+        // ---- X first (dimension order) ----
+        if (fdx != 2'd0) begin
+            if (fdx == 2'd1)
+                out_port = PORT_E;                          // +1 (wrap if my_x==3)
+            else if (fdx == 2'd3)
+                out_port = PORT_W;                          // -1 (wrap if my_x==0)
+            else // fdx == 2 : opposite, tie -> split by coord to break the cycle
+                out_port = (my_x < 2'd2) ? PORT_E : PORT_W;
+        end
+        // ---- then Y ----
+        else if (fdy != 2'd0) begin
+            if (fdy == 2'd1)
+                out_port = PORT_N;                          // +1 (wrap if my_y==3)
+            else if (fdy == 2'd3)
+                out_port = PORT_S;                          // -1 (wrap if my_y==0)
+            else // fdy == 2 : opposite, tie -> split by coord
+                out_port = (my_y < 2'd2) ? PORT_N : PORT_S;
+        end
+        else
+            out_port = PORT_L;
+    end
+
+
 endmodule
 
 
@@ -710,7 +742,7 @@ endmodule
 module torus_router_5x5 #(
     parameter int CURR_X     = 0,
     parameter int CURR_Y     = 0,
-    parameter int FIFO_DEPTH = 2
+    parameter int FIFO_DEPTH = 4
 )(
     input  logic            clk,
     input  logic            rst_n,

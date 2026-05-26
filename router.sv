@@ -27,18 +27,18 @@ module xy_route_logic (
 
     // XY routing algorithm
 
-    // always_comb begin
-    //     if (dst_x > my_x)
-    //         out_port = PORT_E;
-    //     else if (dst_x < my_x)
-    //         out_port = PORT_W;
-    //     else if (dst_y > my_y)
-    //         out_port = PORT_N;
-    //     else if (dst_y < my_y)
-    //         out_port = PORT_S;
-    //     else
-    //         out_port = PORT_L;
-    // end
+//     always_comb begin
+//         if (dst_x > my_x)
+//             out_port = PORT_E;
+//         else if (dst_x < my_x)
+//             out_port = PORT_W;
+//         else if (dst_y > my_y)
+//             out_port = PORT_N;
+//         else if (dst_y < my_y)
+//             out_port = PORT_S;
+//         else
+//             out_port = PORT_L;
+//     end
 
 
 
