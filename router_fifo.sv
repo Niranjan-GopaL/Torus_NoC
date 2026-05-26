@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 // =============================================================================
-// 1. xy_route_logic — XY Routing Decode 
+// 1. xy_route_logic - XY Routing Decode 
 //   Decodes the destination from flit[7:4] and emits a 3-bit port select.
 //   Port encoding: N=0, S=1, E=2, W=3, L=4
 // =============================================================================
@@ -25,21 +25,72 @@ module xy_route_logic (
     localparam PORT_W = 3'd3;
     localparam PORT_L = 3'd4;
 
-    always_comb begin
-        if (dst_x > my_x)
-            out_port = PORT_E;
-        else if (dst_x < my_x)
-            out_port = PORT_W;
-        else if (dst_y > my_y)
-            out_port = PORT_N;
-        else if (dst_y < my_y)
-            out_port = PORT_S;
-        else
-            out_port = PORT_L;
-    end
+//    always_comb begin
+//        if (dst_x > my_x)
+//            out_port = PORT_E;
+//        else if (dst_x < my_x)
+//            out_port = PORT_W;
+//        else if (dst_y > my_y)
+//            out_port = PORT_N;
+//        else if (dst_y < my_y)
+//            out_port = PORT_S;
+//        else
+//            out_port = PORT_L;
+//    end
 
 
-    // My own custom torus routing algorithm 
+    // Odd Even routing algorithm
+
+    // always_comb begin
+    //     // Check if we've reached the destination
+    //     if ((dst_x == my_x) && (dst_y == my_y)) begin
+    //         out_port = PORT_L;
+    //     end
+    //     // Odd-Even routing logic
+    //     else begin
+    //         // Determine if current column is even or odd
+    //         // Assuming my_x[0] = 0 means even, my_x[0] = 1 means odd
+    //         if (my_x[0] == 0) begin  // Even column
+    //             // In even columns, allow turns from North/South to East/West
+    //             if (dst_x != my_x) begin
+    //                 // Prefer horizontal movement first
+    //                 if (dst_x > my_x)
+    //                     out_port = PORT_E;
+    //                 else
+    //                     out_port = PORT_W;
+    //             end
+    //             else begin
+    //                 // Same column, move vertically
+    //                 if (dst_y > my_y)
+    //                     out_port = PORT_N;
+    //                 else
+    //                     out_port = PORT_S;
+    //             end
+    //         end
+    //         else begin  // Odd column
+    //             // In odd columns, restrict East-West turns
+    //             if ((dst_y != my_y) && (dst_x == my_x)) begin
+    //                 // Same column, move vertically first
+    //                 if (dst_y > my_y)
+    //                     out_port = PORT_N;
+    //                 else
+    //                     out_port = PORT_S;
+    //             end
+    //             else begin
+    //                 // Then move horizontally
+    //                 if (dst_x > my_x)
+    //                     out_port = PORT_E;
+    //                 else if (dst_x < my_x)
+    //                     out_port = PORT_W;
+    //                 else
+    //                     out_port = PORT_L;  // Should not reach here
+    //             end
+    //         end
+    //     end
+    // end
+
+
+
 
     logic [1:0] fdx, fdy;   // forward (East/North) ring distance, mod 4
 
@@ -69,12 +120,11 @@ module xy_route_logic (
             out_port = PORT_L;
     end
 
-
 endmodule
 
 
 // =============================================================================
-// 2. valid_ready_slice — Unified skid buffer (UNCHANGED, kept for A/B + outputs)
+// 2. valid_ready_slice - Unified skid buffer (UNCHANGED, kept for A/B + outputs)
 // =============================================================================
 module valid_ready_slice (
     input  logic        clk,
@@ -92,7 +142,7 @@ module valid_ready_slice (
     logic        data_valid;
     logic [7:0]  data_reg;
 
-    assign ready_out = rst_n && !data_valid;
+    assign ready_out = rst_n && (!data_valid || ready_in) ;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -115,18 +165,18 @@ endmodule
 
 
 // =============================================================================
-// 2b. fifo_sync — Synchronous FIFO, drop-in replacement for valid_ready_slice
+// 2b. fifo_sync - Synchronous FIFO, drop-in replacement for valid_ready_slice
 //
 //   PIN-COMPATIBLE with valid_ready_slice: identical port names + handshake
 //   contract, so it can be swapped in the input-slice instantiation with no
 //   other change to router_simple / router_with_fifo.
 //
 //   Handshake contract (matches the skid buffer it replaces):
-//     • ready_out = !full   — depends ONLY on internal occupancy, never on
+//     • ready_out = !full   - depends ONLY on internal occupancy, never on
 //                             ready_in. No combinational ready->ready path.
-//     • valid_out = !empty  — derived from registered pointers, no
+//     • valid_out = !empty  - derived from registered pointers, no
 //                             combinational fall-through of data_in/valid_in.
-//     • data_out  = mem[rd_ptr] — registered FIFO head.
+//     • data_out  = mem[rd_ptr] - registered FIFO head.
 //
 //   Full/empty: extra-MSB pointer trick. Pointers are PTR_WIDTH+1 bits.
 //     empty = (wr_ptr == rd_ptr)
@@ -222,7 +272,7 @@ endmodule
 
 
 // =============================================================================
-// 3. split_1to4_simple — 1->4 Demux with XY routing  
+// 3. split_1to4_simple - 1->4 Demux with XY routing  
 // =============================================================================
 module split_1to4_simple #(
     parameter int INPUT_PORT = 0
@@ -315,7 +365,7 @@ endmodule
 
 
 // =============================================================================
-// 4. merge_4to1_comb — 4->1 Merge with Round-Robin Arbitration  
+// 4. merge_4to1_comb - 4->1 Merge with Round-Robin Arbitration  
 // =============================================================================
 module merge_4to1_comb #(
     parameter int DATA_WIDTH = 8,
@@ -369,7 +419,7 @@ endmodule
 
 
 // =============================================================================
-// 5. router_with_fifo — Top-level router (was router_simple)
+// 5. router_with_fifo - Top-level router (was router_simple)
 //
 //   ONLY CHANGE vs router_simple: the 5 INPUT slices are now fifo_sync of
 //   depth FIFO_DEPTH (default 4). Output slices, splits, merges, the port
@@ -387,7 +437,7 @@ module router_with_fifo #(
     input  logic [1:0]  my_x,
     input  logic [1:0]  my_y,
 
-    // External inputs — order: [LOCAL, EAST, WEST, NORTH, SOUTH]
+    // External inputs - order: [LOCAL, EAST, WEST, NORTH, SOUTH]
     input  logic [4:0]  in_valid,
     input  logic [7:0]  in_data_0,  // LOCAL
     input  logic [7:0]  in_data_1,  // EAST
@@ -396,7 +446,7 @@ module router_with_fifo #(
     input  logic [7:0]  in_data_4,  // SOUTH
     output logic [4:0]  in_ready,
 
-    // External outputs — order: [LOCAL, EAST, WEST, NORTH, SOUTH]
+    // External outputs - order: [LOCAL, EAST, WEST, NORTH, SOUTH]
     output logic [4:0]  out_valid,
     output logic [7:0]  out_data_0,  // LOCAL
     output logic [7:0]  out_data_1,  // EAST
@@ -473,7 +523,7 @@ module router_with_fifo #(
     logic [4:0] slice_to_merge_ready;
 
     // =========================================================================
-    // INPUT FIFOs (5)  — ONLY structural change: fifo_sync instead of slice.
+    // INPUT FIFOs (5)  - ONLY structural change: fifo_sync instead of slice.
     // Same port connections as the original input valid_ready_slice block.
     // =========================================================================
     genvar gi;
@@ -713,7 +763,7 @@ module router_with_fifo #(
     assign split_ready[3][3] = m4_ready_in[3];
 
     // =========================================================================
-    // OUTPUT SLICES (5) — kept as depth-1 valid_ready_slice 
+    // OUTPUT SLICES (5) - kept as depth-1 valid_ready_slice 
     // =========================================================================
     genvar go;
     generate
@@ -735,14 +785,14 @@ endmodule
 
 
 // =============================================================================
-// 6. torus_router_5x5 — Wrapper matching the testbench interface
+// 6. torus_router_5x5 - Wrapper matching the testbench interface
 //   UNCHANGED except it now instantiates router_with_fifo and forwards
 //   FIFO_DEPTH. Interface is byte-for-byte identical to the original.
 // =============================================================================
 module torus_router_5x5 #(
     parameter int CURR_X     = 0,
     parameter int CURR_Y     = 0,
-    parameter int FIFO_DEPTH = 4
+    parameter int FIFO_DEPTH =  64
 )(
     input  logic            clk,
     input  logic            rst_n,
