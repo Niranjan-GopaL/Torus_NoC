@@ -65,7 +65,7 @@ module torus_4x4 #(
                 torus_router_5x5 #(
                     .CURR_X (gx),
                     .CURR_Y (gy),
-                    .FIFO_DEPTH (FIFO_DEPTH)
+                     .FIFO_DEPTH (FIFO_DEPTH)
                 ) u_router (
                     .clk      (clk),
                     .rst_n    (rst_n),

@@ -182,6 +182,7 @@ module tb_torus_4x4_random_bp_10k;
                     for (int i = 0; i < NUM_NODES; i++) begin
                         // 80% ready, 20% backpressure
                         local_out_rdy[i] = ($urandom_range(0, 4) != 0);
+                        // local_out_rdy[i] = '1;
                     end
                 end
 

@@ -1,37 +1,40 @@
 `timescale 1ns/1ps
 
 // =============================================================================
-//  5-port torus router (one node of a 4x4 network)
+//  5-port torus router, FIFO-buffered on BOTH input and output stages (v2)
 //
-//  Flow of a flit through the router:
-//    input slice  ->  split (route decode + demux)  ->  merge (arbitrate)  ->  output slice
+//  Same as router_fifo.sv, but now the output stage uses a real FIFO too. The
+//  output FIFO acts as a small elasticity buffer between the merge arbiter and
+//  whatever sits downstream on the link: the merge can keep granting flits even
+//  if the downstream router is briefly slow to accept them, which smooths out
+//  the per-port backpressure that the round-robin sees.
 //
-//  A flit is 8 bits. The top nibble is the destination: [7:6]=x, [5:4]=y.
-//  Ports use a valid/ready handshake everywhere.
+//  Input and output depths are separately parameterizable.
 //
-//  Port encoding (internal): N=0, S=1, E=2, W=3, L=4   (L = local/this node)
+//  Pipeline: input FIFO -> split -> round-robin merge -> output FIFO.
+//  Flit format: 8 bits, top nibble = destination ([7:6]=x, [5:4]=y).
+//  Port encoding (internal): N=0, S=1, E=2, W=3, L=4
 // =============================================================================
 
 
 // =============================================================================
-//  xy_route_logic - decide which output port a flit should leave by
+//  xy_route_logic - pick the output port (custom torus routing)
 //
-//  Reads the destination from the flit, compares it to where we are (my_x/my_y),
-//  and picks one of the 5 ports. Three algorithms are selectable via parameter:
-//  plain XY, Odd-Even, and a custom torus router.
+//  Ring distance wraps mod 4, so we take the shorter way round, X before Y.
+//  Distance of 2 is a tie (both ways equal); we break it by coordinate so the
+//  flow doesn't form a cycle.
 // =============================================================================
-module xy_route_logic #(
-    parameter int ROUTING_ALGO = 0   // 0 = XY, 1 = Odd-Even, 2 = Torus
-)(
+module xy_route_logic (
     input  logic [7:0] data_in,
     input  logic [1:0] my_x,
     input  logic [1:0] my_y,
     output logic [2:0] out_port
 );
 
-    // Destination coords live in the top nibble of the flit.
-    logic [1:0] dst_x = data_in[7:6];
-    logic [1:0] dst_y = data_in[5:4];
+    logic [1:0] dst_x;
+    logic [1:0] dst_y;
+    assign dst_x = data_in[7:6];
+    assign dst_y = data_in[5:4];
 
     localparam PORT_N = 3'd0;
     localparam PORT_S = 3'd1;
@@ -39,127 +42,108 @@ module xy_route_logic #(
     localparam PORT_W = 3'd3;
     localparam PORT_L = 3'd4;
 
-generate
-    // ---- Plain XY: go fully in X first, then in Y, then you've arrived. ----
-    if (ROUTING_ALGO == 0) begin : xy_routing
-        always_comb begin
-            if      (dst_x > my_x) out_port = PORT_E;
-            else if (dst_x < my_x) out_port = PORT_W;
-            else if (dst_y > my_y) out_port = PORT_N;
-            else if (dst_y < my_y) out_port = PORT_S;
-            else                   out_port = PORT_L;   // we're the destination
+    logic [1:0] fdx, fdy;   // forward (E/N) ring distance, mod 4
+
+    always_comb begin
+        fdx = (dst_x - my_x) & 2'b11;
+        fdy = (dst_y - my_y) & 2'b11;
+
+        if (fdx != 2'd0) begin                      // sort out X first
+            if      (fdx == 2'd1) out_port = PORT_E; // one step forward
+            else if (fdx == 2'd3) out_port = PORT_W; // one step back (shorter)
+            else                  out_port = (my_x < 2'd2) ? PORT_E : PORT_W; // tie
         end
-    end
-
-    // ---- Odd-Even turn model: column parity restricts which turns are legal,
-    //      which is what keeps it deadlock-free. ----
-    else if (ROUTING_ALGO == 1) begin : oe_routing
-        always_comb begin
-            if (dst_x == my_x && dst_y == my_y) begin
-                out_port = PORT_L;                       // arrived
-            end
-            else if (my_x[0] == 0) begin                 // even column
-                // Even columns: clear out the X distance first, otherwise step in Y.
-                if (dst_x != my_x)
-                    out_port = (dst_x > my_x) ? PORT_E : PORT_W;
-                else
-                    out_port = (dst_y > my_y) ? PORT_N : PORT_S;
-            end
-            else begin                                   // odd column
-                // Odd columns: if we're already in the right column, finish in Y;
-                // otherwise keep moving in X.
-                if (dst_y != my_y && dst_x == my_x)
-                    out_port = (dst_y > my_y) ? PORT_N : PORT_S;
-                else if (dst_x > my_x) out_port = PORT_E;
-                else if (dst_x < my_x) out_port = PORT_W;
-                else                   out_port = PORT_L; // unreachable, just in case
-            end
+        else if (fdy != 2'd0) begin                 // then Y
+            if      (fdy == 2'd1) out_port = PORT_N;
+            else if (fdy == 2'd3) out_port = PORT_S;
+            else                  out_port = (my_y < 2'd2) ? PORT_N : PORT_S; // tie
         end
+        else
+            out_port = PORT_L;                       // arrived
     end
-
-    // ---- Custom torus routing (dimension order, X then Y) ----
-    //      On a ring, "distance" wraps mod 4. We compute the forward distance
-    //      and pick the shorter way round. A distance of 2 is a tie (both ways
-    //      are equal), so we break it by coordinate to avoid creating a cycle.
-    else if (ROUTING_ALGO == 2) begin : torus_routing
-        logic [1:0] fdx, fdy;   // forward (E/N) ring distance, mod 4
-
-        always_comb begin
-            fdx = (dst_x - my_x) & 2'b11;
-            fdy = (dst_y - my_y) & 2'b11;
-
-            if (fdx != 2'd0) begin                       // sort out X first
-                if      (fdx == 2'd1) out_port = PORT_E;  // one step forward
-                else if (fdx == 2'd3) out_port = PORT_W;  // one step back (shorter)
-                else                  out_port = (my_x < 2'd2) ? PORT_E : PORT_W; // tie
-            end
-            else if (fdy != 2'd0) begin                  // then Y
-                if      (fdy == 2'd1) out_port = PORT_N;
-                else if (fdy == 2'd3) out_port = PORT_S;
-                else                  out_port = (my_y < 2'd2) ? PORT_N : PORT_S; // tie
-            end
-            else
-                out_port = PORT_L;                        // arrived
-        end
-    end
-endgenerate
 
 endmodule
 
 
 // =============================================================================
-//  valid_ready_slice - a one-deep skid buffer (registered stage)
+//  fifo_sync - synchronous FIFO, used at both input and output stages
 //
-//  Same module is reused at every input and output. It breaks combinational
-//  paths: data_out is always the registered value, and ready_out never depends
-//  combinationally on ready_in, so handshakes don't ripple through.
+//  Pin-compatible handshake: ready_out depends only on occupancy (!full),
+//  valid_out on !empty, data_out is the registered head.
+//
+//  Full/empty use the classic extra-MSB pointer trick: pointers are one bit
+//  wider than the address. Same address but different MSB => full; fully equal
+//  => empty. The address part wraps explicitly at DEPTH-1 and flips the MSB on
+//  wrap, so this works for any DEPTH >= 2, not just powers of two.
 // =============================================================================
-module valid_ready_slice (
-    input  logic        clk,
-    input  logic        rst_n,
+module fifo_sync #(
+    parameter int DEPTH      = 4,
+    parameter int DATA_WIDTH = 8
+)(
+    input  logic                  clk,
+    input  logic                  rst_n,
 
-    input  logic [7:0]  data_in,
-    input  logic        valid_in,
-    output logic        ready_out,
+    input  logic [DATA_WIDTH-1:0] data_in,
+    input  logic                  valid_in,
+    output logic                  ready_out,
 
-    output logic [7:0]  data_out,
-    output logic        valid_out,
-    input  logic        ready_in
+    output logic [DATA_WIDTH-1:0] data_out,
+    output logic                  valid_out,
+    input  logic                  ready_in
 );
 
-    logic       data_valid;
-    logic [7:0] data_reg;
+    localparam int PTR_WIDTH = (DEPTH <= 1) ? 1 : $clog2(DEPTH);
 
-    // We can take new data if the slot is empty, or it's emptying this cycle.
-    assign ready_out = rst_n && (!data_valid || ready_in);
+    logic [DATA_WIDTH-1:0] mem [0:DEPTH-1];
+    logic [PTR_WIDTH:0]    wr_ptr, rd_ptr;   // extra MSB = wrap bit
+    logic                  empty, full;
+
+    assign empty = (wr_ptr == rd_ptr);
+    assign full  = (wr_ptr[PTR_WIDTH-1:0] == rd_ptr[PTR_WIDTH-1:0]) &&
+                   (wr_ptr[PTR_WIDTH]      != rd_ptr[PTR_WIDTH]);
+
+    assign ready_out = rst_n && !full;
+    assign valid_out = !empty;
+    assign data_out  = mem[rd_ptr[PTR_WIDTH-1:0]];
+
+    logic do_push;
+    logic do_pop;
+    assign do_push = valid_in  && ready_out;
+    assign do_pop  = valid_out && ready_in;
+
+    // Advance a {wrap, addr} pointer: addr wraps DEPTH-1 -> 0 and flips the MSB.
+    function automatic logic [PTR_WIDTH:0] ptr_next(input logic [PTR_WIDTH:0] p);
+        logic [PTR_WIDTH-1:0] addr; logic wrap;
+        begin
+            addr = p[PTR_WIDTH-1:0];
+            wrap = p[PTR_WIDTH];
+            if (addr == (DEPTH-1)) begin addr = '0; wrap = ~wrap; end
+            else                        addr = addr + 1'b1;
+            ptr_next = {wrap, addr};
+        end
+    endfunction
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            data_valid <= 1'b0;
-            data_reg   <= 8'h00;
+            wr_ptr <= '0;
+            rd_ptr <= '0;
         end else begin
-            if (valid_in && ready_out)        data_valid <= 1'b1;   // load
-            else if (data_valid && ready_in)  data_valid <= 1'b0;   // drain
-            if (valid_in && ready_out)        data_reg   <= data_in;
+            if (do_push) begin mem[wr_ptr[PTR_WIDTH-1:0]] <= data_in; wr_ptr <= ptr_next(wr_ptr); end
+            if (do_pop)  rd_ptr <= ptr_next(rd_ptr);
         end
     end
-
-    assign valid_out = data_valid;
-    assign data_out  = data_reg;
 
 endmodule
 
 
 // =============================================================================
-//  split_1to4_simple - route a flit, then send it out one of 4 ports
+//  split_1to4_simple - route a flit, send it out one of 4 non-self ports
 //
-//  Asks xy_route_logic where the flit should go, then maps that to one of the
-//  four non-self outputs (a flit never leaves the way it came in, so each input
-//  has a different "exclude" map).
+//  Asks the route logic for a direction, then maps that to one of four outputs
+//  (a flit never leaves the way it came, so each input excludes its own port).
 // =============================================================================
 module split_1to4_simple #(
-    parameter int INPUT_PORT   = 0,
-    parameter int ROUTING_ALGO = 0
+    parameter int INPUT_PORT = 0
 )(
     input  logic       valid_in,
     input  logic [7:0] data_in,
@@ -173,20 +157,17 @@ module split_1to4_simple #(
     input  logic [3:0] ready_out
 );
 
-    logic [2:0] global_port;   // 0..4, the chosen direction
-    logic [1:0] dest_index;    // 0..3, which of our 4 outputs that maps to
+    logic [2:0] global_port;   // chosen direction 0..4
+    logic [1:0] dest_index;    // mapped to our output 0..3
 
-    xy_route_logic #(.ROUTING_ALGO(ROUTING_ALGO)) u_xy (
-        .data_in(data_in), .my_x(my_x), .my_y(my_y), .out_port(global_port)
-    );
+    xy_route_logic u_xy (.data_in(data_in), .my_x(my_x), .my_y(my_y), .out_port(global_port));
 
     always_comb begin
         valid_out  = 4'b0000;
         ready_in   = 1'b0;
         dest_index = 2'd0;
 
-        // Each input drops its own direction from the list, so the remaining
-        // four directions pack down into output indices 0..3.
+        // Each input drops its own direction; the rest pack into indices 0..3.
         case (INPUT_PORT)
             0: case (global_port) 1:dest_index=0; 2:dest_index=1; 3:dest_index=2; 4:dest_index=3; default:dest_index=0; endcase // N
             1: case (global_port) 0:dest_index=0; 2:dest_index=1; 3:dest_index=2; 4:dest_index=3; default:dest_index=0; endcase // S
@@ -199,7 +180,7 @@ module split_1to4_simple #(
         ready_in = ready_out[dest_index];   // backpressure from the chosen output
     end
 
-    assign data_out = data_in;   // we route, we don't modify
+    assign data_out = data_in;
 
 endmodule
 
@@ -207,10 +188,9 @@ endmodule
 // =============================================================================
 //  merge_4to1_comb - 4-to-1 merge with round-robin arbitration
 //
-//  Four inputs compete for one output. Round-robin keeps it fair: a 'mask'
-//  remembers who has already been served this round, so everyone gets a turn
-//  before anyone gets a second one. Losers just hold their request, which
-//  naturally pushes backpressure upstream.
+//  Four inputs, one output. A 'mask' tracks who's been served this round so
+//  everyone gets a turn before anyone repeats. Losers hold their request,
+//  which pushes backpressure upstream on its own.
 // =============================================================================
 module merge_4to1_comb #(
     parameter int DATA_WIDTH = 8,
@@ -228,14 +208,13 @@ module merge_4to1_comb #(
     output logic [DATA_WIDTH-1:0] data_out
 );
 
-    logic [NUM_PORTS-1:0]         mask;            // who's still eligible this round
+    logic [NUM_PORTS-1:0]         mask;            // still eligible this round
     logic [NUM_PORTS-1:0]         masked_req;
     logic [NUM_PORTS-1:0]         unmasked_grant;
     logic [NUM_PORTS-1:0]         grant;
     logic [$clog2(NUM_PORTS)-1:0] selected_port;
 
-    // Requests still eligible this round, and the fallback if none are.
-    // (x & -x) isolates the lowest set bit, i.e. a simple priority pick.
+    // (x & -x) isolates the lowest set bit = simple priority pick.
     assign masked_req     = valid_in & mask;
     assign unmasked_grant = valid_in & (~valid_in + 1);
     assign grant = (|masked_req) ? (masked_req & (~masked_req + 1)) : unmasked_grant;
@@ -251,8 +230,7 @@ module merge_4to1_comb #(
     assign valid_out = |grant;
     assign data_out  = data_in[selected_port];
 
-    // After a grant, drop that port from the mask. When the mask empties (or we
-    // had to use the fallback), start a fresh round.
+    // Clear the served port from the mask; refill the mask when a round ends.
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             mask <= {NUM_PORTS{1'b1}};
@@ -264,16 +242,20 @@ endmodule
 
 
 // =============================================================================
-//  router_simple - the full router
+//  router_with_fifo_v2 - the full router, input FIFOs + output FIFOs
 //
-//  5 input slices  ->  5 splits  ->  5 round-robin merges  ->  5 output slices.
-//  Each merge collects the four splits that can target its direction.
+//  Five input FIFOs feed five splits, splits feed five round-robin merges, and
+//  merges drain into five output FIFOs. Output FIFOs give the merge somewhere
+//  to put a granted flit even if the downstream link is momentarily not ready,
+//  so a single slow neighbor doesn't immediately starve everyone competing for
+//  that direction.
 //
-//  The testbench numbers ports [LOCAL, EAST, WEST, NORTH, SOUTH], but internally
-//  we use [N, S, E, W, L]. The first thing we do is remap between the two.
+//  Testbench port order is [LOCAL, EAST, WEST, NORTH, SOUTH]; internally we use
+//  [N, S, E, W, L]. The remap below bridges the two.
 // =============================================================================
-module router_simple #(
-    parameter int ROUTING_ALGO = 0
+module router_with_fifo_v2 #(
+    parameter int IN_FIFO_DEPTH  = 4,
+    parameter int OUT_FIFO_DEPTH = 4
 )(
     input  logic        clk,
     input  logic        rst_n,
@@ -290,7 +272,7 @@ module router_simple #(
     input  logic [7:0]  in_data_4,  // SOUTH
     output logic [4:0]  in_ready,
 
-    // External outputs - same [LOCAL, EAST, WEST, NORTH, SOUTH] order
+    // External outputs - same order
     output logic [4:0]  out_valid,
     output logic [7:0]  out_data_0,
     output logic [7:0]  out_data_1,
@@ -309,7 +291,6 @@ module router_simple #(
     logic [7:0] out_data_int [4:0];
 
     always_comb begin
-        // inputs: pull each internal port from its testbench counterpart
         in_valid_int[0] = in_valid[3];  in_data_int[0] = in_data_3;  // N
         in_valid_int[1] = in_valid[4];  in_data_int[1] = in_data_4;  // S
         in_valid_int[2] = in_valid[1];  in_data_int[2] = in_data_1;  // E
@@ -318,7 +299,6 @@ module router_simple #(
     end
 
     always_comb begin
-        // outputs: push each internal port back out to its testbench slot
         out_valid[0] = out_valid_int[4];  out_data_0 = out_data_int[4];  // L
         out_valid[1] = out_valid_int[2];  out_data_1 = out_data_int[2];  // E
         out_valid[2] = out_valid_int[3];  out_data_2 = out_data_int[3];  // W
@@ -341,32 +321,32 @@ module router_simple #(
     // -------------------------------------------------------------------------
     //  Internal wiring
     // -------------------------------------------------------------------------
-    logic [7:0] slice_to_split_data  [4:0];   // input slice -> split
-    logic [4:0] slice_to_split_valid;
-    logic [4:0] split_to_slice_ready;
+    logic [7:0] fifo_to_split_data  [4:0];   // input FIFO -> split
+    logic [4:0] fifo_to_split_valid;
+    logic [4:0] split_to_fifo_ready;
 
-    logic [3:0] split_valid [4:0];            // split -> merge (4 outs per split)
+    logic [3:0] split_valid [4:0];           // split -> merge
     logic [3:0] split_ready [4:0];
     logic [7:0] split_data  [4:0];
 
-    logic [7:0] merge_to_slice_data  [4:0];   // merge -> output slice
-    logic [4:0] merge_to_slice_valid;
-    logic [4:0] slice_to_merge_ready;
+    logic [7:0] merge_to_fifo_data  [4:0];   // merge -> output FIFO
+    logic [4:0] merge_to_fifo_valid;
+    logic [4:0] fifo_to_merge_ready;
 
     // -------------------------------------------------------------------------
-    //  Input slices (5)
+    //  Input FIFOs (5)
     // -------------------------------------------------------------------------
     genvar gi;
     generate
-        for (gi = 0; gi < 5; gi = gi + 1) begin : g_input_slice
-            valid_ready_slice u_input_slice (
+        for (gi = 0; gi < 5; gi = gi + 1) begin : g_input_fifo
+            fifo_sync #(.DEPTH(IN_FIFO_DEPTH), .DATA_WIDTH(8)) u_input_fifo (
                 .clk(clk), .rst_n(rst_n),
                 .data_in  (in_data_int[gi]),
                 .valid_in (in_valid_int[gi]),
                 .ready_out(in_ready_int[gi]),
-                .data_out (slice_to_split_data[gi]),
-                .valid_out(slice_to_split_valid[gi]),
-                .ready_in (split_to_slice_ready[gi])
+                .data_out (fifo_to_split_data[gi]),
+                .valid_out(fifo_to_split_valid[gi]),
+                .ready_in (split_to_fifo_ready[gi])
             );
         end
     endgenerate
@@ -374,80 +354,65 @@ module router_simple #(
     // -------------------------------------------------------------------------
     //  Splits (5) - one per input direction
     // -------------------------------------------------------------------------
-    split_1to4_simple #(.INPUT_PORT(0), .ROUTING_ALGO(ROUTING_ALGO)) u_split_0 (
-        .valid_in(slice_to_split_valid[0]), .data_in(slice_to_split_data[0]), .ready_in(split_to_slice_ready[0]),
-        .my_x(my_x), .my_y(my_y), .valid_out(split_valid[0]), .data_out(split_data[0]), .ready_out(split_ready[0]));
-    split_1to4_simple #(.INPUT_PORT(1), .ROUTING_ALGO(ROUTING_ALGO)) u_split_1 (
-        .valid_in(slice_to_split_valid[1]), .data_in(slice_to_split_data[1]), .ready_in(split_to_slice_ready[1]),
-        .my_x(my_x), .my_y(my_y), .valid_out(split_valid[1]), .data_out(split_data[1]), .ready_out(split_ready[1]));
-    split_1to4_simple #(.INPUT_PORT(2), .ROUTING_ALGO(ROUTING_ALGO)) u_split_2 (
-        .valid_in(slice_to_split_valid[2]), .data_in(slice_to_split_data[2]), .ready_in(split_to_slice_ready[2]),
-        .my_x(my_x), .my_y(my_y), .valid_out(split_valid[2]), .data_out(split_data[2]), .ready_out(split_ready[2]));
-    split_1to4_simple #(.INPUT_PORT(3), .ROUTING_ALGO(ROUTING_ALGO)) u_split_3 (
-        .valid_in(slice_to_split_valid[3]), .data_in(slice_to_split_data[3]), .ready_in(split_to_slice_ready[3]),
-        .my_x(my_x), .my_y(my_y), .valid_out(split_valid[3]), .data_out(split_data[3]), .ready_out(split_ready[3]));
-    split_1to4_simple #(.INPUT_PORT(4), .ROUTING_ALGO(ROUTING_ALGO)) u_split_4 (
-        .valid_in(slice_to_split_valid[4]), .data_in(slice_to_split_data[4]), .ready_in(split_to_slice_ready[4]),
-        .my_x(my_x), .my_y(my_y), .valid_out(split_valid[4]), .data_out(split_data[4]), .ready_out(split_ready[4]));
+    split_1to4_simple #(.INPUT_PORT(0)) u_split_0 (.valid_in(fifo_to_split_valid[0]), .data_in(fifo_to_split_data[0]), .ready_in(split_to_fifo_ready[0]), .my_x(my_x), .my_y(my_y), .valid_out(split_valid[0]), .data_out(split_data[0]), .ready_out(split_ready[0]));
+    split_1to4_simple #(.INPUT_PORT(1)) u_split_1 (.valid_in(fifo_to_split_valid[1]), .data_in(fifo_to_split_data[1]), .ready_in(split_to_fifo_ready[1]), .my_x(my_x), .my_y(my_y), .valid_out(split_valid[1]), .data_out(split_data[1]), .ready_out(split_ready[1]));
+    split_1to4_simple #(.INPUT_PORT(2)) u_split_2 (.valid_in(fifo_to_split_valid[2]), .data_in(fifo_to_split_data[2]), .ready_in(split_to_fifo_ready[2]), .my_x(my_x), .my_y(my_y), .valid_out(split_valid[2]), .data_out(split_data[2]), .ready_out(split_ready[2]));
+    split_1to4_simple #(.INPUT_PORT(3)) u_split_3 (.valid_in(fifo_to_split_valid[3]), .data_in(fifo_to_split_data[3]), .ready_in(split_to_fifo_ready[3]), .my_x(my_x), .my_y(my_y), .valid_out(split_valid[3]), .data_out(split_data[3]), .ready_out(split_ready[3]));
+    split_1to4_simple #(.INPUT_PORT(4)) u_split_4 (.valid_in(fifo_to_split_valid[4]), .data_in(fifo_to_split_data[4]), .ready_in(split_to_fifo_ready[4]), .my_x(my_x), .my_y(my_y), .valid_out(split_valid[4]), .data_out(split_data[4]), .ready_out(split_ready[4]));
 
     // -------------------------------------------------------------------------
     //  Merges (5) - one per output direction
-    //
-    //  Each output gathers the four splits that can aim at it (every direction
-    //  except itself). The split_ready hookups close the backpressure loop.
+    //  Each output gathers the four splits that can target it. The split_ready
+    //  assigns close the backpressure loop.
     // -------------------------------------------------------------------------
 
     // OUTPUT N: from S, E, W, L
     logic [7:0] m0_data_in [0:3]; logic [3:0] m0_valid_in, m0_ready_in;
     assign m0_data_in[0]=split_data[1]; assign m0_data_in[1]=split_data[2]; assign m0_data_in[2]=split_data[3]; assign m0_data_in[3]=split_data[4];
     assign m0_valid_in = {split_valid[4][0], split_valid[3][0], split_valid[2][0], split_valid[1][0]};
-    merge_4to1_comb u_merge_0 (.clk(clk), .rst_n(rst_n), .valid_in(m0_valid_in), .ready_in(m0_ready_in), .data_in(m0_data_in),
-        .valid_out(merge_to_slice_valid[0]), .ready_out(slice_to_merge_ready[0]), .data_out(merge_to_slice_data[0]));
+    merge_4to1_comb u_merge_0 (.clk(clk), .rst_n(rst_n), .valid_in(m0_valid_in), .ready_in(m0_ready_in), .data_in(m0_data_in), .valid_out(merge_to_fifo_valid[0]), .ready_out(fifo_to_merge_ready[0]), .data_out(merge_to_fifo_data[0]));
     assign split_ready[1][0]=m0_ready_in[0]; assign split_ready[2][0]=m0_ready_in[1]; assign split_ready[3][0]=m0_ready_in[2]; assign split_ready[4][0]=m0_ready_in[3];
 
     // OUTPUT S: from N, E, W, L
     logic [7:0] m1_data_in [0:3]; logic [3:0] m1_valid_in, m1_ready_in;
     assign m1_data_in[0]=split_data[0]; assign m1_data_in[1]=split_data[2]; assign m1_data_in[2]=split_data[3]; assign m1_data_in[3]=split_data[4];
     assign m1_valid_in = {split_valid[4][1], split_valid[3][1], split_valid[2][1], split_valid[0][0]};
-    merge_4to1_comb u_merge_1 (.clk(clk), .rst_n(rst_n), .valid_in(m1_valid_in), .ready_in(m1_ready_in), .data_in(m1_data_in),
-        .valid_out(merge_to_slice_valid[1]), .ready_out(slice_to_merge_ready[1]), .data_out(merge_to_slice_data[1]));
+    merge_4to1_comb u_merge_1 (.clk(clk), .rst_n(rst_n), .valid_in(m1_valid_in), .ready_in(m1_ready_in), .data_in(m1_data_in), .valid_out(merge_to_fifo_valid[1]), .ready_out(fifo_to_merge_ready[1]), .data_out(merge_to_fifo_data[1]));
     assign split_ready[0][0]=m1_ready_in[0]; assign split_ready[2][1]=m1_ready_in[1]; assign split_ready[3][1]=m1_ready_in[2]; assign split_ready[4][1]=m1_ready_in[3];
 
     // OUTPUT E: from N, S, W, L
     logic [7:0] m2_data_in [0:3]; logic [3:0] m2_valid_in, m2_ready_in;
     assign m2_data_in[0]=split_data[0]; assign m2_data_in[1]=split_data[1]; assign m2_data_in[2]=split_data[3]; assign m2_data_in[3]=split_data[4];
     assign m2_valid_in = {split_valid[4][2], split_valid[3][2], split_valid[1][1], split_valid[0][1]};
-    merge_4to1_comb u_merge_2 (.clk(clk), .rst_n(rst_n), .valid_in(m2_valid_in), .ready_in(m2_ready_in), .data_in(m2_data_in),
-        .valid_out(merge_to_slice_valid[2]), .ready_out(slice_to_merge_ready[2]), .data_out(merge_to_slice_data[2]));
+    merge_4to1_comb u_merge_2 (.clk(clk), .rst_n(rst_n), .valid_in(m2_valid_in), .ready_in(m2_ready_in), .data_in(m2_data_in), .valid_out(merge_to_fifo_valid[2]), .ready_out(fifo_to_merge_ready[2]), .data_out(merge_to_fifo_data[2]));
     assign split_ready[0][1]=m2_ready_in[0]; assign split_ready[1][1]=m2_ready_in[1]; assign split_ready[3][2]=m2_ready_in[2]; assign split_ready[4][2]=m2_ready_in[3];
 
     // OUTPUT W: from N, S, E, L
     logic [7:0] m3_data_in [0:3]; logic [3:0] m3_valid_in, m3_ready_in;
     assign m3_data_in[0]=split_data[0]; assign m3_data_in[1]=split_data[1]; assign m3_data_in[2]=split_data[2]; assign m3_data_in[3]=split_data[4];
     assign m3_valid_in = {split_valid[4][3], split_valid[2][2], split_valid[1][2], split_valid[0][2]};
-    merge_4to1_comb u_merge_3 (.clk(clk), .rst_n(rst_n), .valid_in(m3_valid_in), .ready_in(m3_ready_in), .data_in(m3_data_in),
-        .valid_out(merge_to_slice_valid[3]), .ready_out(slice_to_merge_ready[3]), .data_out(merge_to_slice_data[3]));
+    merge_4to1_comb u_merge_3 (.clk(clk), .rst_n(rst_n), .valid_in(m3_valid_in), .ready_in(m3_ready_in), .data_in(m3_data_in), .valid_out(merge_to_fifo_valid[3]), .ready_out(fifo_to_merge_ready[3]), .data_out(merge_to_fifo_data[3]));
     assign split_ready[0][2]=m3_ready_in[0]; assign split_ready[1][2]=m3_ready_in[1]; assign split_ready[2][2]=m3_ready_in[2]; assign split_ready[4][3]=m3_ready_in[3];
 
     // OUTPUT L: from N, S, E, W
     logic [7:0] m4_data_in [0:3]; logic [3:0] m4_valid_in, m4_ready_in;
     assign m4_data_in[0]=split_data[0]; assign m4_data_in[1]=split_data[1]; assign m4_data_in[2]=split_data[2]; assign m4_data_in[3]=split_data[3];
     assign m4_valid_in = {split_valid[3][3], split_valid[2][3], split_valid[1][3], split_valid[0][3]};
-    merge_4to1_comb u_merge_4 (.clk(clk), .rst_n(rst_n), .valid_in(m4_valid_in), .ready_in(m4_ready_in), .data_in(m4_data_in),
-        .valid_out(merge_to_slice_valid[4]), .ready_out(slice_to_merge_ready[4]), .data_out(merge_to_slice_data[4]));
+    merge_4to1_comb u_merge_4 (.clk(clk), .rst_n(rst_n), .valid_in(m4_valid_in), .ready_in(m4_ready_in), .data_in(m4_data_in), .valid_out(merge_to_fifo_valid[4]), .ready_out(fifo_to_merge_ready[4]), .data_out(merge_to_fifo_data[4]));
     assign split_ready[0][3]=m4_ready_in[0]; assign split_ready[1][3]=m4_ready_in[1]; assign split_ready[2][3]=m4_ready_in[2]; assign split_ready[3][3]=m4_ready_in[3];
 
     // -------------------------------------------------------------------------
-    //  Output slices (5) - same slice module as the inputs
+    //  Output FIFOs (5) - the change vs router_with_fifo
+    //  Same fifo_sync module as the inputs, just with its own depth parameter.
     // -------------------------------------------------------------------------
     genvar go;
     generate
-        for (go = 0; go < 5; go = go + 1) begin : g_output_slice
-            valid_ready_slice u_output_slice (
+        for (go = 0; go < 5; go = go + 1) begin : g_output_fifo
+            fifo_sync #(.DEPTH(OUT_FIFO_DEPTH), .DATA_WIDTH(8)) u_output_fifo (
                 .clk(clk), .rst_n(rst_n),
-                .data_in  (merge_to_slice_data[go]),
-                .valid_in (merge_to_slice_valid[go]),
-                .ready_out(slice_to_merge_ready[go]),
+                .data_in  (merge_to_fifo_data[go]),
+                .valid_in (merge_to_fifo_valid[go]),
+                .ready_out(fifo_to_merge_ready[go]),
                 .data_out (out_data_int[go]),
                 .valid_out(out_valid_int[go]),
                 .ready_in (out_ready_int[go])
@@ -459,13 +424,17 @@ endmodule
 
 
 // =============================================================================
-//  torus_router_5x5 - thin wrapper that matches the testbench's port shape
-//  (packed [4:0][7:0] buses) and feeds router_simple.
+//  torus_router_5x5 - wrapper matching the testbench's packed-bus interface.
+//
+//  FIFO_DEPTH sets the input FIFO depth and is also the default for the output
+//  FIFO depth. Override OUT_FIFO_DEPTH separately if you want the two stages
+//  sized differently.
 // =============================================================================
 module torus_router_5x5 #(
-    parameter int CURR_X       = 0,
-    parameter int CURR_Y       = 0,
-    parameter int ROUTING_ALGO = 2
+    parameter int CURR_X         = 0,
+    parameter int CURR_Y         = 0,
+    parameter int IN_FIFO_DEPTH     = 16,
+    parameter int OUT_FIFO_DEPTH = 16
 )(
     input  logic            clk,
     input  logic            rst_n,
@@ -479,7 +448,10 @@ module torus_router_5x5 #(
     output logic [4:0][7:0] out_data
 );
 
-    router_simple #(.ROUTING_ALGO(ROUTING_ALGO)) u_router (
+    router_with_fifo_v2 #(
+        .IN_FIFO_DEPTH (IN_FIFO_DEPTH),
+        .OUT_FIFO_DEPTH(OUT_FIFO_DEPTH)
+    ) u_router (
         .clk(clk), .rst_n(rst_n),
         .my_x(CURR_X[1:0]), .my_y(CURR_Y[1:0]),
         .in_valid(in_vld), .in_ready(in_rdy),

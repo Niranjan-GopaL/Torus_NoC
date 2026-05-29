@@ -281,8 +281,8 @@ endmodule
 // =============================================================================
 module vc_router #(
     parameter int NUM_VC        = 2,
-    parameter int FIFO_DEPTH    = 4,
-    parameter int OUT_FIFO_DEPTH = 16    // <-- NEW: depth of the 5 output FIFOs
+    parameter int FIFO_DEPTH    = 16,
+    parameter int OUT_FIFO_DEPTH = 16
 )(
     input  logic        clk,
     input  logic        rst_n,

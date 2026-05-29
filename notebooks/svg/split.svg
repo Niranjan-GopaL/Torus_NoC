@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 820">
+    <defs><pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+    <circle cx="1" cy="1" r="0.8" fill="#1F2933"/>
+  </pattern></defs>
+  <rect width="1600" height="820" fill="#0A0E13"/>
+  <rect width="1600" height="820" fill="url(#dots)" opacity="0.5"/>
+    <text x="60" y="40" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">// 1→4 DEMUX · ROUTING-DRIVEN · NO U-TURN</text>
+    <text x="60" y="100" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="52" font-weight="700">split_1to4_simple</text>
+    <text x="60" y="140" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">Fans the input into one of four output directions chosen by xy_route_logic.</text>
+    <text x="60" y="162" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">The input's own direction is excluded — flits never make a U-turn.</text>
+
+    <rect x="60" y="220" width="1000" height="530" rx="6" fill="none" stroke="#3B4654" stroke-width="1"/>
+    <text x="74" y="242" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">// DATAPATH</text>
+
+    <!-- input -->
+    <line x1="100" y1="360" x2="372" y2="360" stroke="#F5B14B" stroke-width="2.2"/>
+    <polygon points="372,355 380,360 372,365" fill="#F5B14B"/>
+    <text x="100" y="351" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">data_in [7:0]</text>
+    <line x1="100" y1="420" x2="372" y2="420" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="372,415 380,420 372,425" fill="#5BD982"/>
+    <text x="100" y="411" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">valid_in</text>
+    <line x1="108" y1="480" x2="380" y2="480" stroke="#5BBAF0" stroke-width="2.2"/>
+    <polygon points="108,475 100,480 108,485" fill="#5BBAF0"/>
+    <text x="380" y="471" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_in</text>
+
+    <!-- route logic -->
+    <rect x="380" y="330" width="170" height="190" rx="6" fill="#1B2230" stroke="#A88BFA" stroke-width="1.5"/>
+    <text x="465" y="420" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="15" font-weight="700" text-anchor="middle">xy_route</text>
+    <text x="465" y="442" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">→ global_port</text>
+
+    <!-- demux fan -->
+    <line x1="550" y1="425" x2="690" y2="300" stroke="#5C6B7A" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="550" y1="425" x2="690" y2="390" stroke="#5C6B7A" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="550" y1="425" x2="690" y2="480" stroke="#5C6B7A" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="550" y1="425" x2="690" y2="570" stroke="#5C6B7A" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- four outputs -->
+    <circle cx="690" cy="300" r="6" fill="#11161D" stroke="#5BD982" stroke-width="2"/>
+        <line x1="700" y1="300" x2="1002" y2="300" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="1002,295 1010,300 1002,305" fill="#5BD982"/>
+    <text x="1004" y="291" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">valid_out[0]</text><circle cx="690" cy="390" r="6" fill="#11161D" stroke="#5BD982" stroke-width="2"/>
+        <line x1="700" y1="390" x2="1002" y2="390" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="1002,385 1010,390 1002,395" fill="#5BD982"/>
+    <text x="1004" y="381" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">valid_out[1]</text><circle cx="690" cy="480" r="6" fill="#11161D" stroke="#5BD982" stroke-width="2"/>
+        <line x1="700" y1="480" x2="1002" y2="480" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="1002,475 1010,480 1002,485" fill="#5BD982"/>
+    <text x="1004" y="471" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">valid_out[2]</text><circle cx="690" cy="570" r="6" fill="#11161D" stroke="#5BD982" stroke-width="2"/>
+        <line x1="700" y1="570" x2="1002" y2="570" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="1002,565 1010,570 1002,575" fill="#5BD982"/>
+    <text x="1004" y="561" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">valid_out[3]</text>
+
+    <text x="855" y="615" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">data_out [7:0]  (broadcast)</text>
+    <line x1="700" y1="600" x2="1010" y2="600" stroke="#F5B14B" stroke-width="2" opacity="0.6"/>
+
+    <rect x="1100" y="220" width="460" height="530" rx="6" fill="#11161D" stroke="#3B4654" stroke-width="1"/>
+<circle cx="1116" cy="242" r="3.5" fill="#5BD982"/>
+<text x="1128" y="247" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" letter-spacing="2">● ROUTING TABLE</text>
+<text x="1116" y="276" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">PORTS  // INTERNAL ORDER</text>
+<text x="1116" y="294" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">N=0  S=1  E=2  W=3  L=4</tspan></text>
+<text x="1116" y="322" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">NO-U-TURN MAP // PORT 0 (N)</text>
+<text x="1116" y="340" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#5C6B7A">global_port → dest_index</tspan></text>
+<text x="1116" y="362" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  S(1) → 0    E(2) → 1</tspan></text>
+<text x="1116" y="384" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  W(3) → 2    L(4) → 3</tspan></text>
+<text x="1116" y="412" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">OUTPUT ASSERTION</text>
+<text x="1116" y="430" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#5BD982">valid_out</tspan><tspan fill="#D7E1EA">[dest_index] = </tspan><tspan fill="#5BD982">valid_in</tspan></text>
+<text x="1116" y="452" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#5BBAF0">ready_in</tspan><tspan fill="#D7E1EA"> = </tspan><tspan fill="#5BBAF0">ready_out</tspan><tspan fill="#D7E1EA">[dest_index]</tspan></text>
+  </svg>

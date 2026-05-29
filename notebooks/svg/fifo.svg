@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 820">
+    <defs><pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+    <circle cx="1" cy="1" r="0.8" fill="#1F2933"/>
+  </pattern></defs>
+  <rect width="1600" height="820" fill="#0A0E13"/>
+  <rect width="1600" height="820" fill="url(#dots)" opacity="0.5"/>
+    <text x="60" y="40" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">// SYNCHRONOUS FIFO · READY-VALID HANDSHAKE</text>
+    <text x="60" y="100" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="52" font-weight="700">fifo_sync</text>
+    <text x="60" y="140" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">Parameter-depth registered buffer. Pin-compatible with valid_ready_slice.</text>
+    <text x="60" y="162" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">ready_out depends only on occupancy — never on ready_in. Extra-MSB trick disambiguates full/empty.</text>
+
+    <rect x="60" y="220" width="920" height="520" rx="6" fill="none" stroke="#3B4654" stroke-width="1"/>
+    <text x="74" y="242" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">// DATAPATH</text>
+
+    <line x1="100" y1="320" x2="372" y2="320" stroke="#F5B14B" stroke-width="2.2"/>
+    <polygon points="372,315 380,320 372,325" fill="#F5B14B"/>
+    <text x="100" y="311" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">data_in [7:0]</text>
+    <line x1="100" y1="400" x2="372" y2="400" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="372,395 380,400 372,405" fill="#5BD982"/>
+    <text x="100" y="391" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">valid_in</text>
+    <line x1="108" y1="540" x2="380" y2="540" stroke="#5BBAF0" stroke-width="2.2"/>
+    <polygon points="108,535 100,540 108,545" fill="#5BBAF0"/>
+    <text x="380" y="531" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_out = !full</text>
+
+    <!-- memory -->
+    <rect x="380" y="300" width="320" height="200" rx="8" fill="#1B2230" stroke="#3B4654" stroke-width="1.5"/>
+    <text x="540" y="328" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700" text-anchor="middle">mem [0:DEPTH-1]</text>
+    <text x="436" y="362" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">rd_ptr ↓</text>
+    <text x="540" y="362" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">wr_ptr ↓</text>
+    
+      <rect x="410" y="380" width="50" height="50" rx="4"
+            fill="#0A0E13" stroke="#5BD982" stroke-width="1.5"/>
+      <text x="435" y="412" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" text-anchor="middle">B0</text>
+      <rect x="475" y="380" width="50" height="50" rx="4"
+            fill="#0A0E13" stroke="#5BD982" stroke-width="1.5"/>
+      <text x="500" y="412" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" text-anchor="middle">B1</text>
+      <rect x="540" y="380" width="50" height="50" rx="4"
+            fill="transparent" stroke="#3B4654" stroke-width="1.5"/>
+      <text x="565" y="412" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" text-anchor="middle">··</text>
+      <rect x="605" y="380" width="50" height="50" rx="4"
+            fill="transparent" stroke="#3B4654" stroke-width="1.5"/>
+      <text x="630" y="412" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700" text-anchor="middle">··</text>
+    <text x="540" y="465" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">occupancy = 2 / 4</text>
+
+    <line x1="700" y1="320" x2="972" y2="320" stroke="#F5B14B" stroke-width="2.2"/>
+    <polygon points="972,315 980,320 972,325" fill="#F5B14B"/>
+    <text x="974" y="311" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">data_out [7:0]</text>
+    <line x1="700" y1="400" x2="972" y2="400" stroke="#5BD982" stroke-width="2.2"/>
+    <polygon points="972,395 980,400 972,405" fill="#5BD982"/>
+    <text x="974" y="391" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">valid_out = !empty</text>
+    <line x1="708" y1="540" x2="980" y2="540" stroke="#5BBAF0" stroke-width="2.2"/>
+    <polygon points="708,535 700,540 708,545" fill="#5BBAF0"/>
+    <text x="980" y="531" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_in</text>
+
+    <line x1="510" y1="500" x2="510" y2="560" stroke="#A88BFA" stroke-width="2"/>
+    <circle cx="510" cy="565" r="4" fill="#A88BFA"/>
+    <text x="510" y="588" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">clk</text>
+    <line x1="575" y1="500" x2="575" y2="560" stroke="#F076B0" stroke-width="2"/>
+    <circle cx="575" cy="565" r="4" fill="#F076B0"/>
+    <text x="575" y="588" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">rst_n</text>
+
+    <rect x="1020" y="220" width="540" height="520" rx="6" fill="#11161D" stroke="#3B4654" stroke-width="1"/>
+<circle cx="1036" cy="242" r="3.5" fill="#5BD982"/>
+<text x="1048" y="247" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" letter-spacing="2">● CONDITIONS</text>
+<text x="1036" y="276" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">OCCUPANCY  // EXTRA-MSB POINTER TRICK</text>
+<text x="1036" y="294" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#D7E1EA">empty = (wr_ptr == rd_ptr)</tspan></text>
+<text x="1036" y="316" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#D7E1EA">full  = (addr_w == addr_r) &amp;&amp;</tspan></text>
+<text x="1036" y="338" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#D7E1EA">        (msb_w ≠ msb_r)</tspan></text>
+<text x="1036" y="366" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">HANDSHAKE OUTPUTS // COMBINATIONAL</text>
+<text x="1036" y="384" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#5BBAF0">ready_out</tspan><tspan fill="#D7E1EA"> = rst_n &amp;&amp; !full</tspan></text>
+<text x="1036" y="406" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#5BD982">valid_out</tspan><tspan fill="#D7E1EA"> = !empty</tspan></text>
+<text x="1036" y="428" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036"> </tspan><tspan fill="#F5B14B">data_out</tspan><tspan fill="#D7E1EA">  = mem[rd_ptr.addr]</tspan></text>
+<text x="1036" y="456" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">POINTER ADVANCE // PTR_NEXT</text>
+<text x="1036" y="474" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#D7E1EA">if addr == DEPTH-1 →</tspan></text>
+<text x="1036" y="496" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#D7E1EA">    addr=0, msb=~msb</tspan></text>
+<text x="1036" y="518" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1036" fill="#D7E1EA">else addr = addr + 1</tspan></text>
+  </svg>

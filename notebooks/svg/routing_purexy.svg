@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 800">
+    <defs><pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+    <circle cx="1" cy="1" r="0.8" fill="#1F2933"/>
+  </pattern></defs>
+  <rect width="1500" height="800" fill="#0A0E13"/>
+  <rect width="1500" height="800" fill="url(#dots)" opacity="0.5"/>
+    <text x="60" y="40" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">// PURE XY ROUTING · MESH STYLE · NO WRAP USED</text>
+    <text x="60" y="100" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="44" font-weight="700">Pure XY routing</text>
+    <text x="60" y="135" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">Compare dst_x with my_x using signed inequality. Goes the "right way around" only — wrap links unused.</text><rect x="88" y="208" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="135" y="259" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(0,0)</text><rect x="198" y="208" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="245" y="259" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(1,0)</text><rect x="308" y="208" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="355" y="259" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(2,0)</text><rect x="418" y="208" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="465" y="259" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(3,0)</text><rect x="88" y="318" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="135" y="369" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(0,1)</text><rect x="198" y="318" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="245" y="369" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(1,1)</text><rect x="308" y="318" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="355" y="369" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(2,1)</text><rect x="418" y="318" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="465" y="369" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(3,1)</text><rect x="88" y="428" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="135" y="479" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(0,2)</text><rect x="198" y="428" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="245" y="479" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(1,2)</text><rect x="308" y="428" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="355" y="479" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(2,2)</text><rect x="418" y="428" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="465" y="479" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(3,2)</text><rect x="88" y="538" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="135" y="589" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(0,3)</text><rect x="198" y="538" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="245" y="589" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(1,3)</text><rect x="308" y="538" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="355" y="589" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(2,3)</text><rect x="418" y="538" width="94" height="94" rx="6" fill="#1B2230" stroke="#3B4654" stroke-width="1"/>
+            <text x="465" y="589" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">(3,3)</text><circle cx="465" cy="255" r="18" fill="#5BD982" opacity="0.8"/>
+        <text x="465" y="260" fill="#0A0E13" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">SRC</text>
+        <circle cx="135" cy="585" r="18" fill="#F5B14B" opacity="0.9"/>
+        <text x="135" y="590" fill="#0A0E13" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">DST</text><line x1="443" y1="255" x2="377" y2="255" stroke="#65D7E5" stroke-width="3"/>
+            <polygon points="377,255 387,249 387,261" fill="#65D7E5"/><line x1="333" y1="255" x2="267" y2="255" stroke="#65D7E5" stroke-width="3"/>
+            <polygon points="267,255 277,249 277,261" fill="#65D7E5"/><line x1="223" y1="255" x2="157" y2="255" stroke="#65D7E5" stroke-width="3"/>
+            <polygon points="157,255 167,249 167,261" fill="#65D7E5"/><line x1="135" y1="277" x2="135" y2="343" stroke="#F076B0" stroke-width="3"/>
+            <polygon points="135,343 129,333 141,333" fill="#F076B0"/><line x1="135" y1="387" x2="135" y2="453" stroke="#F076B0" stroke-width="3"/>
+            <polygon points="135,453 129,443 141,443" fill="#F076B0"/><line x1="135" y1="497" x2="135" y2="563" stroke="#F076B0" stroke-width="3"/>
+            <polygon points="135,563 129,553 141,553" fill="#F076B0"/><rect x="700" y="200" width="760" height="460" rx="6" fill="#11161D" stroke="#3B4654" stroke-width="1"/>
+<circle cx="716" cy="222" r="3.5" fill="#5BD982"/>
+<text x="728" y="227" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" letter-spacing="2">● PROPERTIES</text>
+<text x="716" y="256" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">ALGORITHM</text>
+<text x="716" y="274" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">while dst_x ≠ my_x:</tspan></text>
+<text x="716" y="296" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">  dst_x &gt; my_x → EAST</tspan></text>
+<text x="716" y="318" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">  dst_x &lt; my_x → WEST</tspan></text>
+<text x="716" y="340" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">then Y dimension symmetric</tspan></text>
+<text x="716" y="368" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">WHAT IT WASTES</text>
+<text x="716" y="386" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">Hops (3,0)→(0,3) take </tspan><tspan fill="#F5B14B">6 hops</tspan></text>
+<text x="716" y="408" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">Wrap-aware would take </tspan><tspan fill="#5BD982">2 hops</tspan></text>
+<text x="716" y="430" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">(East-wrap once, South-wrap once)</tspan></text>
+<text x="716" y="458" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">GOOD FOR</text>
+<text x="716" y="476" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="716" fill="#D7E1EA">Mesh topology (no wrap links)</tspan></text><rect x="60" y="640" width="600" height="140" rx="6" fill="#11161D" stroke="#3B4654" stroke-width="1"/>
+        <text x="74" y="660" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1">// pure XY — mesh style</text>
+        <text x="74" y="685" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12">if      (dst_x &gt; my_x) out_port = E;</text>
+        <text x="74" y="703" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12">else if (dst_x &lt; my_x) out_port = W;</text>
+        <text x="74" y="721" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12">else if (dst_y &gt; my_y) out_port = N;</text>
+        <text x="74" y="739" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12">else if (dst_y &lt; my_y) out_port = S;</text>
+        <text x="74" y="757" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12">else                   out_port = L;</text></svg>

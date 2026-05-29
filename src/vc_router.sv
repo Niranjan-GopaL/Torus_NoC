@@ -187,8 +187,8 @@ endmodule
 
 
 // =============================================================================
-// 4. merge_4to1_comb — masked round-robin merge (UNCHANGED, reused for both
-//    stage-1 NUM_PORTS=4 and stage-2 NUM_PORTS=NUM_VC). Requires NUM_PORTS>=2.
+// 4. merge_4to1_comb 
+//    reused for both stage-1 NUM_PORTS=4 and stage-2 NUM_PORTS=NUM_VC). 
 // =============================================================================
 module merge_4to1_comb #(
     parameter int DATA_WIDTH = 8,
@@ -231,11 +231,10 @@ endmodule
 
 
 // =============================================================================
-// 4b. router_plane — one VC plane: the proven 5-split / 5-merge network.
-//   This is exactly the middle of the old router_simple (no input/output
-//   slices). Data buses are flattened to packed [39:0] (5 x 8) so the module
-//   ports stay simulator-friendly.
-//   Port p of pin_data occupies bits [p*8 +: 8]; likewise pout_data per dir.
+// 4b. router_plane — one VC plane: the already working 5-split / 5-merge network from router and router_fifo models
+//   This is exactly the middle of the old router_simple (no input/output slices )
+//   Data buses are flattened to packed [39:0] (5 x 8) in order fix some iverilog issues, in vivado packed arrays didn't have any problem
+//   Port p of pin_data occupies bits [p*8 +: 8]; likewise pout_data per direction.
 // =============================================================================
 module router_plane (
     input  logic        clk,
@@ -253,7 +252,7 @@ module router_plane (
     output logic [39:0] pout_data,
     input  logic [4:0]  pout_ready
 );
-    // unpack input data per port
+    // unpack input data per port, input to splits
     logic [7:0] s_in_data [0:4];
     genvar up;
     generate
@@ -385,18 +384,21 @@ module vc_router #(
     genvar gp, gv;
     generate
         for (gp = 0; gp < 5; gp = gp + 1) begin : g_port
-            // round-robin: chosen VC = rr_cnt[gp]; stall if that VC is full
+
+            // round-robin: chosen VC = rr_cnt[gp]; stall if that VC is full 
             always_comb begin
                 for (int v = 0; v < NUM_VC; v++)
                     fifo_push[gp][v] = in_valid_int[gp] && (rr_cnt[gp] == v[VCW-1:0]);
             end
+
             assign in_ready_int[gp] = fifo_rdy[gp][rr_cnt[gp]];
 
-            always_ff @(posedge clk or negedge rst_n) begin
+            always_ff @(posedge clk or negedge rst_n)
+            begin
                 if (!rst_n)
                     rr_cnt[gp] <= '0;
                 else if (in_valid_int[gp] && in_ready_int[gp])
-                    rr_cnt[gp] <= (rr_cnt[gp] == NUM_VC-1) ? '0 : rr_cnt[gp] + 1'b1;
+                    rr_cnt[gp] <= rr_cnt[gp] + 1'b1;
             end
 
             for (gv = 0; gv < NUM_VC; gv = gv + 1) begin : g_vc_fifo

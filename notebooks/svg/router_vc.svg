@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 820">
+    <defs><pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+    <circle cx="1" cy="1" r="0.8" fill="#1F2933"/>
+  </pattern></defs>
+  <rect width="1600" height="820" fill="#0A0E13"/>
+  <rect width="1600" height="820" fill="url(#dots)" opacity="0.5"/>
+    <text x="60" y="40" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">// 5 INPUTS · 5 OUTPUTS · CROSSBAR INSIDE</text>
+    <text x="60" y="100" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="46" font-weight="700">vc_router · 5-port · NUM_VC planes</text><text x="120" y="235" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="end">in[0] N</text>
+          <line x1="130" y1="230" x2="200" y2="230" stroke="#A88BFA" stroke-width="1.5"/>
+          <polygon points="194,226 200,230 194,234" fill="#A88BFA"/><line x1="1400" y1="230" x2="1470" y2="230" stroke="#5BBAF0" stroke-width="1.5"/>
+          <polygon points="1464,226 1470,230 1464,234" fill="#5BBAF0"/>
+          <text x="1480" y="235" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14">out[0] N</text><text x="120" y="325" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="end">in[1] S</text>
+          <line x1="130" y1="320" x2="200" y2="320" stroke="#A88BFA" stroke-width="1.5"/>
+          <polygon points="194,316 200,320 194,324" fill="#A88BFA"/><line x1="1400" y1="320" x2="1470" y2="320" stroke="#5BBAF0" stroke-width="1.5"/>
+          <polygon points="1464,316 1470,320 1464,324" fill="#5BBAF0"/>
+          <text x="1480" y="325" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14">out[1] S</text><text x="120" y="415" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="end">in[2] E</text>
+          <line x1="130" y1="410" x2="200" y2="410" stroke="#A88BFA" stroke-width="1.5"/>
+          <polygon points="194,406 200,410 194,414" fill="#A88BFA"/><line x1="1400" y1="410" x2="1470" y2="410" stroke="#5BBAF0" stroke-width="1.5"/>
+          <polygon points="1464,406 1470,410 1464,414" fill="#5BBAF0"/>
+          <text x="1480" y="415" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14">out[2] E</text><text x="120" y="505" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="end">in[3] W</text>
+          <line x1="130" y1="500" x2="200" y2="500" stroke="#A88BFA" stroke-width="1.5"/>
+          <polygon points="194,496 200,500 194,504" fill="#A88BFA"/><line x1="1400" y1="500" x2="1470" y2="500" stroke="#5BBAF0" stroke-width="1.5"/>
+          <polygon points="1464,496 1470,500 1464,504" fill="#5BBAF0"/>
+          <text x="1480" y="505" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14">out[3] W</text><text x="120" y="595" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="end">in[4] L</text>
+          <line x1="130" y1="590" x2="200" y2="590" stroke="#A88BFA" stroke-width="1.5"/>
+          <polygon points="194,586 200,590 194,594" fill="#A88BFA"/><line x1="1400" y1="590" x2="1470" y2="590" stroke="#5BBAF0" stroke-width="1.5"/>
+          <polygon points="1464,586 1470,590 1464,594" fill="#5BBAF0"/>
+          <text x="1480" y="595" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14">out[4] L</text><rect x="200" y="180" width="160" height="500" rx="6" fill="#11161D" opacity="0.25" stroke="#3B4654" stroke-width="1"/>
+          <text x="280" y="175" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" text-anchor="middle">VC FIFOs</text><rect x="218" y="210" width="60" height="18" rx="3" fill="#1B2230" stroke="#A88BFA" stroke-width="1"/>
+              <text x="248" y="223" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC0</text>
+              <rect x="282" y="210" width="60" height="18" rx="3" fill="#1B2230" stroke="#F076B0" stroke-width="1"/>
+              <text x="312" y="223" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC1</text><rect x="218" y="300" width="60" height="18" rx="3" fill="#1B2230" stroke="#A88BFA" stroke-width="1"/>
+              <text x="248" y="313" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC0</text>
+              <rect x="282" y="300" width="60" height="18" rx="3" fill="#1B2230" stroke="#F076B0" stroke-width="1"/>
+              <text x="312" y="313" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC1</text><rect x="218" y="390" width="60" height="18" rx="3" fill="#1B2230" stroke="#A88BFA" stroke-width="1"/>
+              <text x="248" y="403" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC0</text>
+              <rect x="282" y="390" width="60" height="18" rx="3" fill="#1B2230" stroke="#F076B0" stroke-width="1"/>
+              <text x="312" y="403" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC1</text><rect x="218" y="480" width="60" height="18" rx="3" fill="#1B2230" stroke="#A88BFA" stroke-width="1"/>
+              <text x="248" y="493" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC0</text>
+              <rect x="282" y="480" width="60" height="18" rx="3" fill="#1B2230" stroke="#F076B0" stroke-width="1"/>
+              <text x="312" y="493" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC1</text><rect x="218" y="570" width="60" height="18" rx="3" fill="#1B2230" stroke="#A88BFA" stroke-width="1"/>
+              <text x="248" y="583" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC0</text>
+              <rect x="282" y="570" width="60" height="18" rx="3" fill="#1B2230" stroke="#F076B0" stroke-width="1"/>
+              <text x="312" y="583" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="9" text-anchor="middle">VC1</text><rect x="460" y="180" width="160" height="500" rx="6" fill="#11161D" opacity="0.25" stroke="#3B4654" stroke-width="1"/>
+          <text x="540" y="175" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" text-anchor="middle">split + xy_route</text><text x="540" y="232" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">split[0]</text><text x="540" y="322" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">split[1]</text><text x="540" y="412" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">split[2]</text><text x="540" y="502" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">split[3]</text><text x="540" y="592" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">split[4]</text><rect x="720" y="180" width="160" height="500" rx="6" fill="#11161D" opacity="0.25" stroke="#3B4654" stroke-width="1"/>
+          <text x="800" y="175" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" text-anchor="middle">plane merges</text><rect x="730" y="212" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#A88BFA" stroke-width="1"/><rect x="730" y="302" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#A88BFA" stroke-width="1"/><rect x="730" y="392" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#A88BFA" stroke-width="1"/><rect x="730" y="482" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#A88BFA" stroke-width="1"/><rect x="730" y="572" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#A88BFA" stroke-width="1"/><rect x="800" y="212" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#F076B0" stroke-width="1"/><rect x="800" y="302" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#F076B0" stroke-width="1"/><rect x="800" y="392" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#F076B0" stroke-width="1"/><rect x="800" y="482" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#F076B0" stroke-width="1"/><rect x="800" y="572" width="60" height="36" rx="3"
+                  fill="#1B2230" stroke="#F076B0" stroke-width="1"/><text x="765" y="710" fill="#A88BFA" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">VC0</text>
+            <text x="835" y="710" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">VC1</text><rect x="980" y="180" width="160" height="500" rx="6" fill="#11161D" opacity="0.25" stroke="#3B4654" stroke-width="1"/>
+          <text x="1060" y="175" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" text-anchor="middle">stage-2 VC arb</text><rect x="1010" y="218" width="100" height="24" rx="2" fill="#0A0E13" stroke="#F076B0" stroke-width="1"/>
+                   <text x="1060" y="235" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">2→1 RR</text><rect x="1010" y="308" width="100" height="24" rx="2" fill="#0A0E13" stroke="#F076B0" stroke-width="1"/>
+                   <text x="1060" y="325" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">2→1 RR</text><rect x="1010" y="398" width="100" height="24" rx="2" fill="#0A0E13" stroke="#F076B0" stroke-width="1"/>
+                   <text x="1060" y="415" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">2→1 RR</text><rect x="1010" y="488" width="100" height="24" rx="2" fill="#0A0E13" stroke="#F076B0" stroke-width="1"/>
+                   <text x="1060" y="505" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">2→1 RR</text><rect x="1010" y="578" width="100" height="24" rx="2" fill="#0A0E13" stroke="#F076B0" stroke-width="1"/>
+                   <text x="1060" y="595" fill="#F076B0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">2→1 RR</text><rect x="1240" y="180" width="160" height="500" rx="6" fill="#11161D" opacity="0.25" stroke="#3B4654" stroke-width="1"/>
+          <text x="1320" y="175" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" text-anchor="middle">output slice</text><rect x="1280" y="218" width="80" height="24" rx="2" fill="#0A0E13" stroke="#5BBAF0" stroke-width="1"/>
+                   <text x="1320" y="235" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">depth 1</text><rect x="1280" y="308" width="80" height="24" rx="2" fill="#0A0E13" stroke="#5BBAF0" stroke-width="1"/>
+                   <text x="1320" y="325" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">depth 1</text><rect x="1280" y="398" width="80" height="24" rx="2" fill="#0A0E13" stroke="#5BBAF0" stroke-width="1"/>
+                   <text x="1320" y="415" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">depth 1</text><rect x="1280" y="488" width="80" height="24" rx="2" fill="#0A0E13" stroke="#5BBAF0" stroke-width="1"/>
+                   <text x="1320" y="505" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">depth 1</text><rect x="1280" y="578" width="80" height="24" rx="2" fill="#0A0E13" stroke="#5BBAF0" stroke-width="1"/>
+                   <text x="1320" y="595" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">depth 1</text><text x="800" y="770" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">NUM_VC parallel "planes" share inputs and outputs. Stage-2 arbiter picks one VC per output per cycle.</text></svg>
