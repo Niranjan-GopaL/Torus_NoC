@@ -78,9 +78,10 @@ generate
     end
 
     // ---- Custom torus routing (dimension order, X then Y) ----
-    //      On a ring, "distance" wraps mod 4. We compute the forward distance
-    //      and pick the shorter way round. A distance of 2 is a tie (both ways
-    //      are equal), so we break it by coordinate to avoid creating a cycle.
+    //      On a ring, "distance" wraps mod 4. 
+    //      We compute the forward distance and pick the shorter way round. 
+    //      A distance of 2 is a tie (both ways are equal), 
+    //      so what we do is break it by coordinate to avoid creating a cycle.
     else if (ROUTING_ALGO == 2) begin : torus_routing
         logic [1:0] fdx, fdy;   // forward (E/N) ring distance, mod 4
 
@@ -88,11 +89,13 @@ generate
             fdx = (dst_x - my_x) & 2'b11;
             fdy = (dst_y - my_y) & 2'b11;
 
-            if (fdx != 2'd0) begin                       // sort out X first
+            // X-dim first
+            if (fdx != 2'd0) begin                        
                 if      (fdx == 2'd1) out_port = PORT_E;  // one step forward
                 else if (fdx == 2'd3) out_port = PORT_W;  // one step back (shorter)
                 else                  out_port = (my_x < 2'd2) ? PORT_E : PORT_W; // tie
             end
+            // then Y-dim
             else if (fdy != 2'd0) begin                  // then Y
                 if      (fdy == 2'd1) out_port = PORT_N;
                 else if (fdy == 2'd3) out_port = PORT_S;
@@ -116,7 +119,7 @@ endmodule
 // =============================================================================
 module valid_ready_slice (
     input  logic        clk,
-    input  logic        rst_n,
+    input  logic        rst_n,  
 
     input  logic [7:0]  data_in,
     input  logic        valid_in,

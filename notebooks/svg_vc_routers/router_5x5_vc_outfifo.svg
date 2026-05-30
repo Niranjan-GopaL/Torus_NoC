@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1900 1100">
+    <defs>
+    <pattern id="dots-navy" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#2C3D58"/>
+    </pattern>
+  </defs>
+  <rect width="1900" height="1100" fill="#131C2A"/>
+  <rect width="1900" height="1100" fill="url(#dots-navy)" opacity="0.45"/>
+    <text x="60" y="58" fill="#FFFFFF" font-family="JetBrains Mono,monospace" font-size="34" font-weight="700">vc_router_output_fifo.sv</text>
+    <text x="60" y="92" fill="#7C8B9D" font-family="Inter,Helvetica,sans-serif" font-size="16">Plane 0 (purple, VC0) + Plane 1 (red, VC1) · stage-2 VC arbiter · FIFO at output</text><path d="M 500 251 C 820 251, 1090 426, 1410 426"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 260 C 820 260, 1090 601, 1410 601"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 269 C 820 269, 1090 776, 1410 776"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 278 C 820 278, 1090 951, 1410 951"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 426 C 820 426, 1090 251, 1410 251"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 435 C 820 435, 1090 610, 1410 610"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 444 C 820 444, 1090 785, 1410 785"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 453 C 820 453, 1090 960, 1410 960"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 601 C 820 601, 1090 260, 1410 260"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 610 C 820 610, 1090 435, 1410 435"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 619 C 820 619, 1090 794, 1410 794"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 628 C 820 628, 1090 969, 1410 969"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 776 C 820 776, 1090 269, 1410 269"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 785 C 820 785, 1090 444, 1410 444"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 794 C 820 794, 1090 619, 1410 619"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 803 C 820 803, 1090 978, 1410 978"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 951 C 820 951, 1090 278, 1410 278"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 960 C 820 960, 1090 453, 1410 453"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 969 C 820 969, 1090 628, 1410 628"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 978 C 820 978, 1090 803, 1410 803"
+                fill="none" stroke="#EC407A" stroke-width="1.2" opacity="0.18"/><path d="M 500 191 C 820 191, 1090 366, 1410 366"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,363 1410,366 1405,369" fill="#7C4DFF" opacity="0.95"/><path d="M 500 200 C 820 200, 1090 541, 1410 541"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,538 1410,541 1405,544" fill="#7C4DFF" opacity="0.95"/><path d="M 500 209 C 820 209, 1090 716, 1410 716"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,713 1410,716 1405,719" fill="#7C4DFF" opacity="0.95"/><path d="M 500 218 C 820 218, 1090 891, 1410 891"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,888 1410,891 1405,894" fill="#7C4DFF" opacity="0.95"/><path d="M 500 366 C 820 366, 1090 191, 1410 191"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,188 1410,191 1405,194" fill="#7C4DFF" opacity="0.95"/><path d="M 500 375 C 820 375, 1090 550, 1410 550"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,547 1410,550 1405,553" fill="#7C4DFF" opacity="0.95"/><path d="M 500 384 C 820 384, 1090 725, 1410 725"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,722 1410,725 1405,728" fill="#7C4DFF" opacity="0.95"/><path d="M 500 393 C 820 393, 1090 900, 1410 900"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,897 1410,900 1405,903" fill="#7C4DFF" opacity="0.95"/><path d="M 500 541 C 820 541, 1090 200, 1410 200"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,197 1410,200 1405,203" fill="#7C4DFF" opacity="0.95"/><path d="M 500 550 C 820 550, 1090 375, 1410 375"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,372 1410,375 1405,378" fill="#7C4DFF" opacity="0.95"/><path d="M 500 559 C 820 559, 1090 734, 1410 734"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,731 1410,734 1405,737" fill="#7C4DFF" opacity="0.95"/><path d="M 500 568 C 820 568, 1090 909, 1410 909"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,906 1410,909 1405,912" fill="#7C4DFF" opacity="0.95"/><path d="M 500 716 C 820 716, 1090 209, 1410 209"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,206 1410,209 1405,212" fill="#7C4DFF" opacity="0.95"/><path d="M 500 725 C 820 725, 1090 384, 1410 384"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,381 1410,384 1405,387" fill="#7C4DFF" opacity="0.95"/><path d="M 500 734 C 820 734, 1090 559, 1410 559"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,556 1410,559 1405,562" fill="#7C4DFF" opacity="0.95"/><path d="M 500 743 C 820 743, 1090 918, 1410 918"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,915 1410,918 1405,921" fill="#7C4DFF" opacity="0.95"/><path d="M 500 891 C 820 891, 1090 218, 1410 218"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,215 1410,218 1405,221" fill="#7C4DFF" opacity="0.95"/><path d="M 500 900 C 820 900, 1090 393, 1410 393"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,390 1410,393 1405,396" fill="#7C4DFF" opacity="0.95"/><path d="M 500 909 C 820 909, 1090 568, 1410 568"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,565 1410,568 1405,571" fill="#7C4DFF" opacity="0.95"/><path d="M 500 918 C 820 918, 1090 743, 1410 743"
+                fill="none" stroke="#7C4DFF" stroke-width="1.9" opacity="0.95"/><polygon points="1405,740 1410,743 1405,746" fill="#7C4DFF" opacity="0.95"/><text x="30" y="223" fill="#00ACC1" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">from N</text>
+          <line x1="30" y1="235" x2="104" y2="235" stroke="#00ACC1" stroke-width="2.2"/>
+          <polygon points="104,228 116,235 104,242" fill="#00ACC1"/><rect x="110" y="207" width="70" height="56" rx="8" fill="#E8EAEF" stroke="#00ACC1" stroke-width="1.6"/>
+          <text x="145" y="223" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="9"  letter-spacing="1.5" text-anchor="middle">VC SEL</text>
+          <text x="145" y="239"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">counter</text>
+          <text x="145" y="255" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">→ 0 | 1</text><path d="M 180 235 C 210 235, 190 205, 216 205"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,200 225,205 216,210" fill="#7C4DFF" opacity="0.9"/><path d="M 180 235 C 210 235, 190 265, 216 265"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,260 225,265 216,270" fill="#EC407A" opacity="0.9"/><rect x="220" y="187" width="145" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="230" y="209" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC0 FIFO</text><rect x="300" y="196" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="318" y="196" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="336" y="196" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="395" y="187" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="447.5" y="203"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="217" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><rect x="1410" y="187" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="1462.5" y="203"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="217" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><line x1="365" y1="205" x2="395" y2="205" stroke="#7C4DFF" stroke-width="1.4" opacity="0.9"/><rect x="220" y="247" width="145" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="230" y="269" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC1 FIFO</text><rect x="300" y="256" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="318" y="256" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="336" y="256" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="395" y="247" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="447.5" y="263"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="277" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><rect x="1410" y="247" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="1462.5" y="263"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="277" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><line x1="365" y1="265" x2="395" y2="265" stroke="#EC407A" stroke-width="1.4" opacity="0.9"/><rect x="1545" y="197" width="100" height="76" rx="8" fill="#E8EAEF" stroke="#00ACC1" stroke-width="2"/>
+          <text x="1595" y="217" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="1.5" text-anchor="middle">STAGE-2</text>
+          <text x="1595" y="237"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">VC arb</text>
+          <text x="1595" y="255" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">2 → 1 RR</text><path d="M 1515 205 C 1533 205, 1527 235, 1545 235"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.9"/><path d="M 1515 265 C 1533 265, 1527 235, 1545 235"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.9"/><rect x="1670" y="185" width="195" height="100" rx="10" fill="#E8EAEF" stroke="#26C6DA" stroke-width="2"/>
+            <text x="1682" y="205" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1.5">OUT N</text>
+            <text x="1767.5" y="231" fill="#1A2540" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" text-anchor="middle">fifo_sync</text><rect x="1692" y="247" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1707" y="265" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B0</text><rect x="1728" y="247" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1743" y="265" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B1</text><rect x="1764" y="247" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1779" y="265" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><rect x="1800" y="247" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1815" y="265" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><line x1="1645" y1="235" x2="1670" y2="235" stroke="#F5B14B" stroke-width="1.8" opacity="1"/><line x1="1865" y1="235" x2="1840" y2="235" stroke="#26C6DA" stroke-width="2.2"/>
+          <polygon points="1840,228 1852,235 1840,242" fill="#26C6DA"/>
+          <text x="1860" y="230" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">to N</text><text x="30" y="398" fill="#E91E63" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">from S</text>
+          <line x1="30" y1="410" x2="104" y2="410" stroke="#E91E63" stroke-width="2.2"/>
+          <polygon points="104,403 116,410 104,417" fill="#E91E63"/><rect x="110" y="382" width="70" height="56" rx="8" fill="#E8EAEF" stroke="#E91E63" stroke-width="1.6"/>
+          <text x="145" y="398" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="9"  letter-spacing="1.5" text-anchor="middle">VC SEL</text>
+          <text x="145" y="414"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">counter</text>
+          <text x="145" y="430" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">→ 0 | 1</text><path d="M 180 410 C 210 410, 190 380, 216 380"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,375 225,380 216,385" fill="#7C4DFF" opacity="0.9"/><path d="M 180 410 C 210 410, 190 440, 216 440"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,435 225,440 216,445" fill="#EC407A" opacity="0.9"/><rect x="220" y="362" width="145" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="230" y="384" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC0 FIFO</text><rect x="300" y="371" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="318" y="371" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="336" y="371" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="395" y="362" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="447.5" y="378"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="392" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><rect x="1410" y="362" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="1462.5" y="378"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="392" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><line x1="365" y1="380" x2="395" y2="380" stroke="#7C4DFF" stroke-width="1.4" opacity="0.9"/><rect x="220" y="422" width="145" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="230" y="444" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC1 FIFO</text><rect x="300" y="431" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="318" y="431" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="336" y="431" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="395" y="422" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="447.5" y="438"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="452" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><rect x="1410" y="422" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="1462.5" y="438"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="452" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><line x1="365" y1="440" x2="395" y2="440" stroke="#EC407A" stroke-width="1.4" opacity="0.9"/><rect x="1545" y="372" width="100" height="76" rx="8" fill="#E8EAEF" stroke="#E91E63" stroke-width="2"/>
+          <text x="1595" y="392" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="1.5" text-anchor="middle">STAGE-2</text>
+          <text x="1595" y="412"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">VC arb</text>
+          <text x="1595" y="430" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">2 → 1 RR</text><path d="M 1515 380 C 1533 380, 1527 410, 1545 410"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.9"/><path d="M 1515 440 C 1533 440, 1527 410, 1545 410"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.9"/><rect x="1670" y="360" width="195" height="100" rx="10" fill="#E8EAEF" stroke="#26C6DA" stroke-width="2"/>
+            <text x="1682" y="380" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1.5">OUT S</text>
+            <text x="1767.5" y="406" fill="#1A2540" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" text-anchor="middle">fifo_sync</text><rect x="1692" y="422" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1707" y="440" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B0</text><rect x="1728" y="422" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1743" y="440" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B1</text><rect x="1764" y="422" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1779" y="440" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><rect x="1800" y="422" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1815" y="440" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><line x1="1645" y1="410" x2="1670" y2="410" stroke="#F5B14B" stroke-width="1.8" opacity="1"/><line x1="1865" y1="410" x2="1840" y2="410" stroke="#26C6DA" stroke-width="2.2"/>
+          <polygon points="1840,403 1852,410 1840,417" fill="#26C6DA"/>
+          <text x="1860" y="405" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">to S</text><text x="30" y="573" fill="#43A047" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">from E</text>
+          <line x1="30" y1="585" x2="104" y2="585" stroke="#43A047" stroke-width="2.2"/>
+          <polygon points="104,578 116,585 104,592" fill="#43A047"/><rect x="110" y="557" width="70" height="56" rx="8" fill="#E8EAEF" stroke="#43A047" stroke-width="1.6"/>
+          <text x="145" y="573" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="9"  letter-spacing="1.5" text-anchor="middle">VC SEL</text>
+          <text x="145" y="589"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">counter</text>
+          <text x="145" y="605" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">→ 0 | 1</text><path d="M 180 585 C 210 585, 190 555, 216 555"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,550 225,555 216,560" fill="#7C4DFF" opacity="0.9"/><path d="M 180 585 C 210 585, 190 615, 216 615"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,610 225,615 216,620" fill="#EC407A" opacity="0.9"/><rect x="220" y="537" width="145" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="230" y="559" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC0 FIFO</text><rect x="300" y="546" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="318" y="546" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="336" y="546" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="395" y="537" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="447.5" y="553"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="567" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><rect x="1410" y="537" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="1462.5" y="553"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="567" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><line x1="365" y1="555" x2="395" y2="555" stroke="#7C4DFF" stroke-width="1.4" opacity="0.9"/><rect x="220" y="597" width="145" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="230" y="619" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC1 FIFO</text><rect x="300" y="606" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="318" y="606" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="336" y="606" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="395" y="597" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="447.5" y="613"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="627" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><rect x="1410" y="597" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="1462.5" y="613"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="627" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><line x1="365" y1="615" x2="395" y2="615" stroke="#EC407A" stroke-width="1.4" opacity="0.9"/><rect x="1545" y="547" width="100" height="76" rx="8" fill="#E8EAEF" stroke="#43A047" stroke-width="2"/>
+          <text x="1595" y="567" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="1.5" text-anchor="middle">STAGE-2</text>
+          <text x="1595" y="587"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">VC arb</text>
+          <text x="1595" y="605" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">2 → 1 RR</text><path d="M 1515 555 C 1533 555, 1527 585, 1545 585"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.9"/><path d="M 1515 615 C 1533 615, 1527 585, 1545 585"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.9"/><rect x="1670" y="535" width="195" height="100" rx="10" fill="#E8EAEF" stroke="#26C6DA" stroke-width="2"/>
+            <text x="1682" y="555" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1.5">OUT E</text>
+            <text x="1767.5" y="581" fill="#1A2540" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" text-anchor="middle">fifo_sync</text><rect x="1692" y="597" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1707" y="615" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B0</text><rect x="1728" y="597" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1743" y="615" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B1</text><rect x="1764" y="597" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1779" y="615" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><rect x="1800" y="597" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1815" y="615" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><line x1="1645" y1="585" x2="1670" y2="585" stroke="#F5B14B" stroke-width="1.8" opacity="1"/><line x1="1865" y1="585" x2="1840" y2="585" stroke="#26C6DA" stroke-width="2.2"/>
+          <polygon points="1840,578 1852,585 1840,592" fill="#26C6DA"/>
+          <text x="1860" y="580" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">to E</text><text x="30" y="748" fill="#FB8C00" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">from W</text>
+          <line x1="30" y1="760" x2="104" y2="760" stroke="#FB8C00" stroke-width="2.2"/>
+          <polygon points="104,753 116,760 104,767" fill="#FB8C00"/><rect x="110" y="732" width="70" height="56" rx="8" fill="#E8EAEF" stroke="#FB8C00" stroke-width="1.6"/>
+          <text x="145" y="748" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="9"  letter-spacing="1.5" text-anchor="middle">VC SEL</text>
+          <text x="145" y="764"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">counter</text>
+          <text x="145" y="780" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">→ 0 | 1</text><path d="M 180 760 C 210 760, 190 730, 216 730"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,725 225,730 216,735" fill="#7C4DFF" opacity="0.9"/><path d="M 180 760 C 210 760, 190 790, 216 790"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,785 225,790 216,795" fill="#EC407A" opacity="0.9"/><rect x="220" y="712" width="145" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="230" y="734" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC0 FIFO</text><rect x="300" y="721" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="318" y="721" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="336" y="721" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="395" y="712" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="447.5" y="728"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="742" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><rect x="1410" y="712" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="1462.5" y="728"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="742" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><line x1="365" y1="730" x2="395" y2="730" stroke="#7C4DFF" stroke-width="1.4" opacity="0.9"/><rect x="220" y="772" width="145" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="230" y="794" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC1 FIFO</text><rect x="300" y="781" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="318" y="781" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="336" y="781" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="395" y="772" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="447.5" y="788"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="802" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><rect x="1410" y="772" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="1462.5" y="788"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="802" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><line x1="365" y1="790" x2="395" y2="790" stroke="#EC407A" stroke-width="1.4" opacity="0.9"/><rect x="1545" y="722" width="100" height="76" rx="8" fill="#E8EAEF" stroke="#FB8C00" stroke-width="2"/>
+          <text x="1595" y="742" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="1.5" text-anchor="middle">STAGE-2</text>
+          <text x="1595" y="762"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">VC arb</text>
+          <text x="1595" y="780" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">2 → 1 RR</text><path d="M 1515 730 C 1533 730, 1527 760, 1545 760"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.9"/><path d="M 1515 790 C 1533 790, 1527 760, 1545 760"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.9"/><rect x="1670" y="710" width="195" height="100" rx="10" fill="#E8EAEF" stroke="#26C6DA" stroke-width="2"/>
+            <text x="1682" y="730" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1.5">OUT W</text>
+            <text x="1767.5" y="756" fill="#1A2540" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" text-anchor="middle">fifo_sync</text><rect x="1692" y="772" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1707" y="790" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B0</text><rect x="1728" y="772" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1743" y="790" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B1</text><rect x="1764" y="772" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1779" y="790" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><rect x="1800" y="772" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1815" y="790" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><line x1="1645" y1="760" x2="1670" y2="760" stroke="#F5B14B" stroke-width="1.8" opacity="1"/><line x1="1865" y1="760" x2="1840" y2="760" stroke="#26C6DA" stroke-width="2.2"/>
+          <polygon points="1840,753 1852,760 1840,767" fill="#26C6DA"/>
+          <text x="1860" y="755" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">to W</text><text x="30" y="923" fill="#8E24AA" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">from L</text>
+          <line x1="30" y1="935" x2="104" y2="935" stroke="#8E24AA" stroke-width="2.2"/>
+          <polygon points="104,928 116,935 104,942" fill="#8E24AA"/><rect x="110" y="907" width="70" height="56" rx="8" fill="#E8EAEF" stroke="#8E24AA" stroke-width="1.6"/>
+          <text x="145" y="923" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="9"  letter-spacing="1.5" text-anchor="middle">VC SEL</text>
+          <text x="145" y="939"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">counter</text>
+          <text x="145" y="955" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">→ 0 | 1</text><path d="M 180 935 C 210 935, 190 905, 216 905"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,900 225,905 216,910" fill="#7C4DFF" opacity="0.9"/><path d="M 180 935 C 210 935, 190 965, 216 965"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.85"/>
+            <polygon points="216,960 225,965 216,970" fill="#EC407A" opacity="0.9"/><rect x="220" y="887" width="145" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="230" y="909" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC0 FIFO</text><rect x="300" y="896" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="318" y="896" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="336" y="896" width="14" height="18" rx="2" fill="#131C2A" stroke="#7C4DFF" stroke-width="0.9" opacity="0.85"/><rect x="395" y="887" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="447.5" y="903"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="917" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><rect x="1410" y="887" width="105" height="36" rx="5" fill="#131C2A" stroke="#7C4DFF" stroke-width="1.6"/>
+            <text x="1462.5" y="903"  fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="917" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC0</text><line x1="365" y1="905" x2="395" y2="905" stroke="#7C4DFF" stroke-width="1.4" opacity="0.9"/><rect x="220" y="947" width="145" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="230" y="969" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">VC1 FIFO</text><rect x="300" y="956" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="318" y="956" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="336" y="956" width="14" height="18" rx="2" fill="#131C2A" stroke="#EC407A" stroke-width="0.9" opacity="0.85"/><rect x="395" y="947" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="447.5" y="963"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">split</text>
+            <text x="447.5" y="977" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><rect x="1410" y="947" width="105" height="36" rx="5" fill="#131C2A" stroke="#EC407A" stroke-width="1.6"/>
+            <text x="1462.5" y="963"  fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" text-anchor="middle">merge</text>
+            <text x="1462.5" y="977" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" opacity="0.85">VC1</text><line x1="365" y1="965" x2="395" y2="965" stroke="#EC407A" stroke-width="1.4" opacity="0.9"/><rect x="1545" y="897" width="100" height="76" rx="8" fill="#E8EAEF" stroke="#8E24AA" stroke-width="2"/>
+          <text x="1595" y="917" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="1.5" text-anchor="middle">STAGE-2</text>
+          <text x="1595" y="937"  fill="#1A2540"   font-family="JetBrains Mono,monospace" font-size="13" font-weight="700"   text-anchor="middle">VC arb</text>
+          <text x="1595" y="955" fill="#5A6878" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">2 → 1 RR</text><path d="M 1515 905 C 1533 905, 1527 935, 1545 935"
+              fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.9"/><path d="M 1515 965 C 1533 965, 1527 935, 1545 935"
+              fill="none" stroke="#EC407A" stroke-width="1.6" opacity="0.9"/><rect x="1670" y="885" width="195" height="100" rx="10" fill="#E8EAEF" stroke="#26C6DA" stroke-width="2"/>
+            <text x="1682" y="905" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1.5">OUT L</text>
+            <text x="1767.5" y="931" fill="#1A2540" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700" text-anchor="middle">fifo_sync</text><rect x="1692" y="947" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1707" y="965" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B0</text><rect x="1728" y="947" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1743" y="965" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">B1</text><rect x="1764" y="947" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1779" y="965" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><rect x="1800" y="947" width="30" height="28" rx="3" fill="#131C2A" stroke="#26C6DA" stroke-width="1.2"/>
+              <text x="1815" y="965" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">··</text><line x1="1645" y1="935" x2="1670" y2="935" stroke="#F5B14B" stroke-width="1.8" opacity="1"/><line x1="1865" y1="935" x2="1840" y2="935" stroke="#26C6DA" stroke-width="2.2"/>
+          <polygon points="1840,928 1852,935 1840,942" fill="#26C6DA"/>
+          <text x="1860" y="930" fill="#26C6DA" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">to L</text><g transform="translate(60, 1020)">
+    <rect x="0" y="0" width="1780" height="64" rx="8" fill="#1F2D42" stroke="#2E3F5A" stroke-width="1"/>
+    <text x="20" y="26" fill="#7C8B9D" font-family="JetBrains Mono,monospace" font-size="11" letter-spacing="1.5">PLANES</text>
+    <line x1="100" y1="22" x2="160" y2="22" stroke="#7C4DFF" stroke-width="3"/>
+    <text x="170" y="27" fill="#7C4DFF" font-family="JetBrains Mono,monospace" font-size="13" font-weight="700">Plane 0  (VC0, purple) — bright</text>
+    <line x1="660" y1="22" x2="720" y2="22" stroke="#EC407A" stroke-width="3" opacity="0.4"/>
+    <text x="730" y="27" fill="#EC407A" font-family="JetBrains Mono,monospace" font-size="13" opacity="0.7">Plane 1  (VC1, red) — dimmed</text>
+    <text x="20" y="52" fill="#7C8B9D" font-family="JetBrains Mono,monospace" font-size="11">Each plane is an independent 5×5 crossbar (every split → every merge, no U-turns). Stage-2 arb picks one VC winner per output.</text>
+  </g></svg>

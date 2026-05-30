@@ -13,8 +13,8 @@ deterministically, is the *worst* of the three on this topology — see
 [docs/results.md](docs/results.md#findings--analysis--2026-05-27) for why
 (it's about head-of-line blocking, not hop count).
 
-> Built during my AMD hardware-engineering internship — assigned as an open-
-> ended exploration of routing-algorithm tradeoffs on a 4×4 torus NoC.
+> Built during my Summer Project in Anuj Verma's RTL Design course 
+> I was assigned as an open-ended exploration of routing-algorithm tradeoffs on a 4×4 torus NoC.
 > All RTL, automation, experiments, and analysis are in this repo.
 
 ---

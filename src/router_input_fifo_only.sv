@@ -44,85 +44,80 @@ module xy_route_logic (
 
     // Odd Even routing algorithm
 
-    // always_comb begin
-    //     // -- Odd-Even turn model (Glass & Ni 1993) -------------------
-    //     // EN, ES turns forbidden in even columns (my_x[0] == 0)
-    //     // NW, SW turns forbidden in odd  columns (my_x[0] == 1)
-    //     //
-    //     // Decision table for (e_x, e_y) = (dst - my):
-    //     //   (0, 0)              -> Local
-    //     //   (0, !=0)            -> N or S by sign of e_y
-    //     //   (!=0, 0)            -> E or W by sign of e_x
-    //     //   e_x>0, even col     -> E     (defer Y until next col odd)
-    //     //   e_x>0, odd  col     -> N/S   (turn Y; allowed in odd col)
-    //     //   e_x<0, even col     -> N/S   (turn Y first; defer W)
-    //     //   e_x<0, odd  col     -> W     (continue W; turn forbidden)
-    //     //
-    //     // This is the deterministic variant (no adaptive choice
-    //     // between permitted turns). Mesh-style: uses literal
-    //     // compares on dst vs. my coords; ignores torus wrap.
-    //     // -----------------------------------------------------------
-    //
-    //     if ((dst_x == my_x) && (dst_y == my_y))
-    //         out_port = PORT_L;
-    //     else if (dst_x == my_x)
-    //         out_port = (dst_y > my_y) ? PORT_N : PORT_S;
-    //     else if (dst_y == my_y)
-    //         out_port = (dst_x > my_x) ? PORT_E : PORT_W;
-    //     else if (dst_x > my_x) begin
-    //         // east-bound diagonal: e_x > 0 and e_y != 0
-    //         if (my_x[0] == 1'b0)
-    //             out_port = PORT_E;                            // even col -> stay X
-    //         else
-    //             out_port = (dst_y > my_y) ? PORT_N : PORT_S;  // odd  col -> turn Y
-    //     end
-    //     else begin
-    //         // west-bound diagonal: e_x < 0 and e_y != 0
-    //         if (my_x[0] == 1'b0)
-    //             out_port = (dst_y > my_y) ? PORT_N : PORT_S;  // even col -> turn Y
-    //         else
-    //             out_port = PORT_W;                            // odd  col -> stay W
-    //     end
-    // end
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+     always_comb begin
+         // -- Odd-Even turn model (Glass & Ni 1993) -------------------
+         // EN, ES turns forbidden in even columns (my_x[0] == 0)
+         // NW, SW turns forbidden in odd  columns (my_x[0] == 1)
+         //
+         // Decision table for (e_x, e_y) = (dst - my):
+         //   (0, 0)              -> Local
+         //   (0, !=0)            -> N or S by sign of e_y
+         //   (!=0, 0)            -> E or W by sign of e_x
+         //   e_x>0, even col     -> E     (defer Y until next col odd)
+         //   e_x>0, odd  col     -> N/S   (turn Y; allowed in odd col)
+         //   e_x<0, even col     -> N/S   (turn Y first; defer W)
+         //   e_x<0, odd  col     -> W     (continue W; turn forbidden)
+         //
+         // This is the deterministic variant (no adaptive choice
+         // between permitted turns). Mesh-style: uses literal
+         // compares on dst vs. my coords; ignores torus wrap.
+         // -----------------------------------------------------------
+    
+         if ((dst_x == my_x) && (dst_y == my_y))
+             out_port = PORT_L;
+         else if (dst_x == my_x)
+             out_port = (dst_y > my_y) ? PORT_N : PORT_S;
+         else if (dst_y == my_y)
+             out_port = (dst_x > my_x) ? PORT_E : PORT_W;
+         else if (dst_x > my_x) begin
+             // east-bound diagonal: e_x > 0 and e_y != 0
+             if (my_x[0] == 1'b0)
+                 out_port = PORT_E;                            // even col -> stay X
+             else
+                 out_port = (dst_y > my_y) ? PORT_N : PORT_S;  // odd  col -> turn Y
+         end
+         else begin
+             // west-bound diagonal: e_x < 0 and e_y != 0
+             if (my_x[0] == 1'b0)
+                 out_port = (dst_y > my_y) ? PORT_N : PORT_S;  // even col -> turn Y
+             else
+                 out_port = PORT_W;                            // odd  col -> stay W
+         end
+     end
+    
+
 
 
 
     // Custom torus routing algorithm
 
-    logic [1:0] fdx, fdy;   // forward (East/North) ring distance, mod 4
+//    logic [1:0] fdx, fdy;   // forward (East/North) ring distance, mod 4
 
-    always_comb begin
-        fdx = (dst_x - my_x) & 2'b11;
-        fdy = (dst_y - my_y) & 2'b11;
+//    always_comb begin
+//        fdx = (dst_x - my_x) & 2'b11;
+//        fdy = (dst_y - my_y) & 2'b11;
 
-        // ---- X first (dimension order) ----
-        if (fdx != 2'd0) begin
-            if (fdx == 2'd1)
-                out_port = PORT_E;                          // +1 (wrap if my_x==3)
-            else if (fdx == 2'd3)
-                out_port = PORT_W;                          // -1 (wrap if my_x==0)
-            else // fdx == 2 : opposite, tie -> split by coord to break the cycle
-                out_port = (my_x < 2'd2) ? PORT_E : PORT_W;
-        end
-        // ---- then Y ----
-        else if (fdy != 2'd0) begin
-            if (fdy == 2'd1)
-                out_port = PORT_N;                          // +1 (wrap if my_y==3)
-            else if (fdy == 2'd3)
-                out_port = PORT_S;                          // -1 (wrap if my_y==0)
-            else // fdy == 2 : opposite, tie -> split by coord
-                out_port = (my_y < 2'd2) ? PORT_N : PORT_S;
-        end
-        else
-            out_port = PORT_L;
-    end
+//        // ---- X first (dimension order) ----
+//        if (fdx != 2'd0) begin
+//            if (fdx == 2'd1)
+//                out_port = PORT_E;                          // +1 (wrap if my_x==3)
+//            else if (fdx == 2'd3)
+//                out_port = PORT_W;                          // -1 (wrap if my_x==0)
+//            else // fdx == 2 : opposite, tie -> split by coord to break the cycle
+//                out_port = (my_x < 2'd2) ? PORT_E : PORT_W;
+//        end
+//        // ---- then Y ----
+//        else if (fdy != 2'd0) begin
+//            if (fdy == 2'd1)
+//                out_port = PORT_N;                          // +1 (wrap if my_y==3)
+//            else if (fdy == 2'd3)
+//                out_port = PORT_S;                          // -1 (wrap if my_y==0)
+//            else // fdy == 2 : opposite, tie -> split by coord
+//                out_port = (my_y < 2'd2) ? PORT_N : PORT_S;
+//        end
+//        else
+//            out_port = PORT_L;
+//    end
 
 endmodule
 
@@ -796,7 +791,7 @@ endmodule
 module torus_router_5x5 #(
     parameter int CURR_X     = 0,
     parameter int CURR_Y     = 0,
-    parameter int FIFO_DEPTH = 64
+    parameter int FIFO_DEPTH = 2
 )(
     input  logic            clk,
     input  logic            rst_n,

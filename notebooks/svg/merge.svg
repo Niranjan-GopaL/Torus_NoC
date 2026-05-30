@@ -5,40 +5,41 @@
   <rect width="1600" height="820" fill="#0A0E13"/>
   <rect width="1600" height="820" fill="url(#dots)" opacity="0.5"/>
     <text x="60" y="40" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="2">// 4→1 MERGE · MASKED ROUND-ROBIN ARBITER</text>
-    <text x="60" y="100" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="52" font-weight="700">merge_4to1_comb</text>
-    <text x="60" y="140" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">Picks one valid input per cycle. A mask register clears the served port and</text>
-    <text x="60" y="162" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">refills when exhausted, guaranteeing fairness across all NUM_PORTS inputs.</text>
+    <text x="60" y="100" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="52" font-weight="700">merge_4to1</text>
+    <text x="60" y="138" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">Picks one valid input per cycle. A mask register clears the served port and reloads when</text>
+    <text x="60" y="160" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="15">exhausted, guaranteeing fairness. Cycle shown: <tspan fill="#5BD982">port 2 selected</tspan> — only its ready lifts to upstream.</text>
 
     <rect x="60" y="220" width="1000" height="530" rx="6" fill="none" stroke="#3B4654" stroke-width="1"/>
     <text x="74" y="242" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2">// DATAPATH</text>
+    <line x1="100" y1="290" x2="472" y2="290" stroke="#5BD982" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="472,285 480,290 472,295" fill="#5BD982" opacity="0.35"/>
+    <text x="100" y="281" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="0.35">valid_in[0] = 0</text><line x1="100" y1="320" x2="472" y2="320" stroke="#F5B14B" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="472,315 480,320 472,325" fill="#F5B14B" opacity="0.35"/>
+    <text x="100" y="311" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="0.35">data_in[0]</text><line x1="108" y1="350" x2="480" y2="350" stroke="#5BBAF0" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="108,345 100,350 108,355" fill="#5BBAF0" opacity="0.35"/>
+    <text x="480" y="341" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end" opacity="0.35">ready_in[0] = 0</text><line x1="100" y1="380" x2="472" y2="380" stroke="#5BD982" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="472,375 480,380 472,385" fill="#5BD982" opacity="0.35"/>
+    <text x="100" y="371" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="0.35">valid_in[1] = 0</text><line x1="100" y1="410" x2="472" y2="410" stroke="#F5B14B" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="472,405 480,410 472,415" fill="#F5B14B" opacity="0.35"/>
+    <text x="100" y="401" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="0.35">data_in[1]</text><line x1="108" y1="440" x2="480" y2="440" stroke="#5BBAF0" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="108,435 100,440 108,445" fill="#5BBAF0" opacity="0.35"/>
+    <text x="480" y="431" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end" opacity="0.35">ready_in[1] = 0</text><line x1="100" y1="470" x2="472" y2="470" stroke="#5BD982" stroke-width="2.2" opacity="1"/>
+    <polygon points="472,465 480,470 472,475" fill="#5BD982" opacity="1"/>
+    <text x="100" y="461" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="1">valid_in[2] = 1</text><line x1="100" y1="500" x2="472" y2="500" stroke="#F5B14B" stroke-width="2.2" opacity="1"/>
+    <polygon points="472,495 480,500 472,505" fill="#F5B14B" opacity="1"/>
+    <text x="100" y="491" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="1">data_in[2] = D</text><line x1="108" y1="530" x2="480" y2="530" stroke="#5BBAF0" stroke-width="2.2" opacity="1"/>
+    <polygon points="108,525 100,530 108,535" fill="#5BBAF0" opacity="1"/>
+    <text x="480" y="521" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end" opacity="1">ready_in[2] = 1</text><line x1="100" y1="560" x2="472" y2="560" stroke="#5BD982" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="472,555 480,560 472,565" fill="#5BD982" opacity="0.35"/>
+    <text x="100" y="551" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="0.35">valid_in[3] = 0</text><line x1="100" y1="590" x2="472" y2="590" stroke="#F5B14B" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="472,585 480,590 472,595" fill="#F5B14B" opacity="0.35"/>
+    <text x="100" y="581" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="0.35">data_in[3]</text><line x1="108" y1="620" x2="480" y2="620" stroke="#5BBAF0" stroke-width="2.2" opacity="0.35"/>
+    <polygon points="108,615 100,620 108,625" fill="#5BBAF0" opacity="0.35"/>
+    <text x="480" y="611" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end" opacity="0.35">ready_in[3] = 0</text>
 
-    <line x1="100" y1="290" x2="472" y2="290" stroke="#5BD982" stroke-width="2.2"/>
-    <polygon points="472,285 480,290 472,295" fill="#5BD982"/>
-    <text x="100" y="281" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">valid_in[0]</text>
-        <line x1="100" y1="320" x2="472" y2="320" stroke="#F5B14B" stroke-width="2.2"/>
-    <polygon points="472,315 480,320 472,325" fill="#F5B14B"/>
-    <text x="100" y="311" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">data_in[0]</text><line x1="100" y1="380" x2="472" y2="380" stroke="#5BD982" stroke-width="2.2"/>
-    <polygon points="472,375 480,380 472,385" fill="#5BD982"/>
-    <text x="100" y="371" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">valid_in[1]</text>
-        <line x1="100" y1="410" x2="472" y2="410" stroke="#F5B14B" stroke-width="2.2"/>
-    <polygon points="472,405 480,410 472,415" fill="#F5B14B"/>
-    <text x="100" y="401" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">data_in[1]</text><line x1="100" y1="470" x2="472" y2="470" stroke="#5BD982" stroke-width="2.2"/>
-    <polygon points="472,465 480,470 472,475" fill="#5BD982"/>
-    <text x="100" y="461" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">valid_in[2]</text>
-        <line x1="100" y1="500" x2="472" y2="500" stroke="#F5B14B" stroke-width="2.2"/>
-    <polygon points="472,495 480,500 472,505" fill="#F5B14B"/>
-    <text x="100" y="491" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">data_in[2]</text><line x1="100" y1="560" x2="472" y2="560" stroke="#5BD982" stroke-width="2.2"/>
-    <polygon points="472,555 480,560 472,565" fill="#5BD982"/>
-    <text x="100" y="551" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">valid_in[3]</text>
-        <line x1="100" y1="590" x2="472" y2="590" stroke="#F5B14B" stroke-width="2.2"/>
-    <polygon points="472,585 480,590 472,595" fill="#F5B14B"/>
-    <text x="100" y="581" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="start">data_in[3]</text>
-
-    <!-- arbiter body -->
     <rect x="480" y="280" width="220" height="380" rx="8" fill="#1B2230" stroke="#3B4654" stroke-width="1.5"/>
     <text x="590" y="310" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2" text-anchor="middle">MASK · GRANT · MUX</text>
 
-    <!-- bitmap visualization of mask -->
     <text x="590" y="345" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">mask = 1010</text>
     
       <rect x="520" y="355" width="26" height="26" rx="3" fill="#A88BFA" opacity="0.9"/>
@@ -64,41 +65,36 @@
     <text x="590" y="510" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">selected_port = 2</text>
     <text x="590" y="540" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700" text-anchor="middle">→ data_in[2]</text>
 
-    <!-- outputs -->
-    <line x1="700" y1="410" x2="1002" y2="410" stroke="#5BD982" stroke-width="2.2"/>
-    <polygon points="1002,405 1010,410 1002,415" fill="#5BD982"/>
-    <text x="1004" y="401" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">valid_out</text>
-    <line x1="700" y1="440" x2="1002" y2="440" stroke="#F5B14B" stroke-width="2.2"/>
-    <polygon points="1002,435 1010,440 1002,445" fill="#F5B14B"/>
-    <text x="1004" y="431" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">data_out</text>
-    <line x1="708" y1="470" x2="1010" y2="470" stroke="#5BBAF0" stroke-width="2.2"/>
-    <polygon points="708,465 700,470 708,475" fill="#5BBAF0"/>
-    <text x="1010" y="461" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_out</text>
+    <!-- Highlight box around granted row -->
+    <rect x="74" y="466" width="396" height="90" rx="4" fill="none" stroke="#5BD982" stroke-width="1.8" stroke-dasharray="4,3"/>
+    <text x="80" y="460" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" letter-spacing="2">GRANTED PORT — READY ASSERTED</text>
 
-    <!-- ready_in fan -->
-    <line x1="108" y1="350" x2="480" y2="350" stroke="#5BBAF0" stroke-width="2.2"/>
-    <polygon points="108,345 100,350 108,355" fill="#5BBAF0"/>
-    <text x="480" y="341" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_in[0]</text><line x1="108" y1="440" x2="480" y2="440" stroke="#5BBAF0" stroke-width="2.2"/>
-    <polygon points="108,435 100,440 108,445" fill="#5BBAF0"/>
-    <text x="480" y="431" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_in[1]</text><line x1="108" y1="530" x2="480" y2="530" stroke="#5BBAF0" stroke-width="2.2"/>
-    <polygon points="108,525 100,530 108,535" fill="#5BBAF0"/>
-    <text x="480" y="521" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_in[2]</text><line x1="108" y1="620" x2="480" y2="620" stroke="#5BBAF0" stroke-width="2.2"/>
-    <polygon points="108,615 100,620 108,625" fill="#5BBAF0"/>
-    <text x="480" y="611" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end">ready_in[3]</text>
+    <line x1="700" y1="410" x2="1002" y2="410" stroke="#5BD982" stroke-width="2.2" opacity="1"/>
+    <polygon points="1002,405 1010,410 1002,415" fill="#5BD982" opacity="1"/>
+    <text x="700" y="401" fill="#5BD982" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="1">valid_out = 1</text>
+    <line x1="700" y1="440" x2="1002" y2="440" stroke="#F5B14B" stroke-width="2.2" opacity="1"/>
+    <polygon points="1002,435 1010,440 1002,445" fill="#F5B14B" opacity="1"/>
+    <text x="700" y="431" fill="#F5B14B" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" opacity="1">data_out = D</text>
+    <line x1="708" y1="470" x2="1010" y2="470" stroke="#5BBAF0" stroke-width="2.2" opacity="1"/>
+    <polygon points="708,465 700,470 708,475" fill="#5BBAF0" opacity="1"/>
+    <text x="1010" y="461" fill="#5BBAF0" font-family="JetBrains Mono, monospace" font-size="13" font-weight="500" text-anchor="end" opacity="1">ready_out</text>
 
     <rect x="1100" y="220" width="460" height="530" rx="6" fill="#11161D" stroke="#3B4654" stroke-width="1"/>
 <circle cx="1116" cy="242" r="3.5" fill="#5BD982"/>
 <text x="1128" y="247" fill="#D7E1EA" font-family="JetBrains Mono, monospace" font-size="12" font-weight="600" letter-spacing="2">● ARBITRATION LOGIC</text>
-<text x="1116" y="276" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">STEP 1  // REQUESTS</text>
-<text x="1116" y="294" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">masked_req = </tspan><tspan fill="#5BD982">valid_in</tspan><tspan fill="#D7E1EA"> &amp; </tspan><tspan fill="#A88BFA">mask</tspan></text>
-<text x="1116" y="316" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">unmasked   = </tspan><tspan fill="#5BD982">valid_in</tspan><tspan fill="#D7E1EA"> &amp; (~v + 1)</tspan></text>
+<text x="1116" y="276" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">STEP 1  // MASKED REQUESTS</text>
+<text x="1116" y="294" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">masked = </tspan><tspan fill="#5BD982">valid_in</tspan><tspan fill="#D7E1EA"> &amp; </tspan><tspan fill="#A88BFA">mask</tspan></text>
+<text x="1116" y="316" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">unmasked = </tspan><tspan fill="#5BD982">valid_in</tspan><tspan fill="#D7E1EA"> &amp; (-v)</tspan></text>
 <text x="1116" y="344" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">STEP 2  // GRANT</text>
-<text x="1116" y="362" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">grant = |masked_req</tspan></text>
-<text x="1116" y="384" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  ? lowest(masked_req)</tspan></text>
+<text x="1116" y="362" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">grant = |masked</tspan></text>
+<text x="1116" y="384" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  ? lowest(masked)</tspan></text>
 <text x="1116" y="406" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  : lowest(unmasked)</tspan></text>
-<text x="1116" y="434" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">STEP 3  // MASK UPDATE</text>
-<text x="1116" y="452" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">on accept &amp; |masked:</tspan></text>
-<text x="1116" y="474" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  </tspan><tspan fill="#A88BFA">mask</tspan><tspan fill="#D7E1EA"> &lt;= mask &amp; ~grant</tspan></text>
-<text x="1116" y="496" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">on accept &amp; !|masked:</tspan></text>
-<text x="1116" y="518" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  </tspan><tspan fill="#A88BFA">mask</tspan><tspan fill="#D7E1EA"> &lt;= '1 &amp; ~grant</tspan></text>
+<text x="1116" y="434" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">STEP 3  // BROADCAST READY</text>
+<text x="1116" y="452" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#5BBAF0">ready_in</tspan><tspan fill="#D7E1EA">[i] = grant[i] &amp;&amp;</tspan></text>
+<text x="1116" y="474" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">           </tspan><tspan fill="#5BBAF0">ready_out</tspan></text>
+<text x="1116" y="502" fill="#5C6B7A" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">STEP 4  // MASK UPDATE</text>
+<text x="1116" y="520" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">on accept &amp; |masked:</tspan></text>
+<text x="1116" y="542" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  </tspan><tspan fill="#A88BFA">mask</tspan><tspan fill="#D7E1EA"> &lt;= mask &amp; ~grant</tspan></text>
+<text x="1116" y="564" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">on accept &amp; !|masked:</tspan></text>
+<text x="1116" y="586" font-family="JetBrains Mono, monospace" font-size="13"><tspan x="1116" fill="#D7E1EA">  </tspan><tspan fill="#A88BFA">mask</tspan><tspan fill="#D7E1EA"> &lt;= '1 &amp; ~grant</tspan></text>
   </svg>
